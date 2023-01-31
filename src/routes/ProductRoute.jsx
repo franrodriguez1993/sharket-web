@@ -18,6 +18,7 @@ import SellerData from "../components/productRoute/SellerData";
 import CommentSection from "../components/productRoute/CommentSection";
 import SectionLoader from "../components/accesories/SectionLoader";
 import SimilarProducts from "../components/productRoute/SimilarProducts";
+import SellerProducts from "../components/productRoute/SellerProducts";
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const ProductRoute = () => {
@@ -37,9 +38,9 @@ const ProductRoute = () => {
     commentTotalPage,
     commentCurrentPage,
     similarProducts,
-    loadingSimilarProducts,
     loadingReputationSeller,
     reputationSeller,
+    sellerProducts,
   } = productStates;
 
   /** USE EFFECT PRODUCT  **/
@@ -56,6 +57,8 @@ const ProductRoute = () => {
         getSimilarProducts(res.data.product_type.pt_id);
         //get Seller Reputation:
         getReputationSeller(res.data.user.user_id);
+        //get seller products:
+        getSellerProducts(res.data.user.user_id);
       } else if (res.status === 404) {
         dispatch({
           type: TYPES_PRODUCTROUTE.error,
@@ -110,6 +113,20 @@ const ProductRoute = () => {
       }
     });
   }
+  /** GET SELLER PRODUCTS**/
+  function getSellerProducts(id) {
+    const url = `${URL_API}/product/list/user/${id}?size=4`;
+    FetchFunction({ url }).then((res) => {
+      if (!res) return;
+      if (res.status === 200) {
+        console.log(res.data);
+        dispatch({
+          type: TYPES_PRODUCTROUTE.sellerProductsData,
+          payload: res.data.products,
+        });
+      }
+    });
+  }
 
   return (
     <div className="ProductRoute-container">
@@ -124,6 +141,7 @@ const ProductRoute = () => {
                   seller={product.user}
                   address={product.user_address}
                   reputations={reputationSeller.reputation}
+                  loadingReputationSeller={loadingReputationSeller}
                 />
               </section>
 
@@ -142,6 +160,13 @@ const ProductRoute = () => {
               {/**  SIMILAR PRODUCTS SECTION **/}
               {similarProducts.length !== 0 && (
                 <SimilarProducts products={similarProducts} />
+              )}
+              {/**  SELLER PRODUCTS SECTION **/}
+              {sellerProducts.length !== 0 && (
+                <SellerProducts
+                  products={sellerProducts}
+                  seller={product.user.user_username}
+                />
               )}
             </>
           ) : (

@@ -13,6 +13,7 @@ export const initialState = {
   commentCurrentPage: 1,
   commentPage: 0,
   similarProducts: [],
+  sellerProducts: [],
   reputationSeller: [],
 };
 
@@ -84,6 +85,9 @@ export const productRouteReducer = (state, action) => {
     /** LOADING REPUTATION SELLER **/
     case TYPES_PRODUCTROUTE.loadingReputationSeller:
       return { ...state, loadingReputationSeller: true };
+    /** LOADING REPUTATION SELLER **/
+    case TYPES_PRODUCTROUTE.sellerProductsData:
+      return { ...state, sellerProducts: action.payload };
     default:
       return state;
   }

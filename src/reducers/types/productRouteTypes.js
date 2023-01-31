@@ -9,6 +9,7 @@ const TYPES_PRODUCTROUTE = {
   backPageComment: "back-page-comment",
   nextPageComment: "next-page-comment",
   similarProductsData: "similar-products-data",
+  sellerProductsData: "seller-products-data",
   reputationsSellerData: "reputation-seller-data",
 };
 export default TYPES_PRODUCTROUTE;
