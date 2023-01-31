@@ -1,0 +1,74 @@
+.containerRoute-search {
+  font-family: var(--FM-Quicksand);
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--lightGray);
+}
+.containerParams-search {
+  width: 30%;
+  min-height: 100%;
+  font-weight: bold;
+}
+.containerResults-search {
+  width: 70%;
+  padding: 2rem;
+}
+.resultSearch-text {
+  margin-top: 1.5rem;
+}
+.containerProducts-search {
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+}
+.noProducts-search {
+  margin-top: 2rem;
+  font-weight: bold;
+}
+.errorMessage-search {
+  font-size: 1.5rem;
+  font-weight: bolder;
+  color: var(--ErrorColor);
+}
+/***   ----------------  PARAMS SECTION  ----------------   ***/
+
+.ParamSection-form {
+  display: flex;
+  flex-direction: column;
+}
+.ParamSection-div-price input {
+  margin: 0.5rem;
+  display: inline-block;
+  width: 6rem;
+}
+.ParamSection-form input,
+.ParamSection-form select {
+  border: none;
+  border-radius: 5%;
+  background-color: #fff;
+}
+
+/***   ----------------  BUTTONS PAGE SECTION  ----------------   ***/
+.btnSearch-disabled {
+  color: var(lightGray);
+  border: none;
+  background-color: var(lightGray);
+}
+.searchParam-submit,
+.btnSearch-active {
+  margin: 0.5rem;
+  border: none;
+  border-radius: 10%;
+  background-color: var(--darkDarkBlue);
+  color: #fff;
+  font-weight: bold;
+}
+.searchParam-submit:hover,
+.btnSearch-active:hover {
+  background-color: var(--lightGray);
+  color: var(--darkDarkBlue);
+  outline: 1px solid var(--darkDarkBlue);
+}

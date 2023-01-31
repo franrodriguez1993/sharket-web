@@ -1,0 +1,18 @@
+.productRow-card tr:hover {
+  cursor: pointer;
+  background-color: var(--lightYellow);
+}
+.productRow-card tr {
+  background-color: #fff;
+  font-weight: bold;
+}
+.productRow-td {
+  padding: 2rem;
+  width: 10rem;
+  border-bottom: 0.1px solid gray;
+}
+
+.productRow-img {
+  width: 4rem;
+  height: 4rem;
+}

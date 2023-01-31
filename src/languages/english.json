@@ -1,0 +1,13 @@
+{
+  "language": "en",
+  "HomeRoute": {},
+  "Form": {
+    "form-mail": "Mail",
+    "form-password": "Password",
+    "form-submit": "Submit",
+    "form-search": "Search"
+  },
+  "LoginRoute": {
+    "title": "Login"
+  }
+}

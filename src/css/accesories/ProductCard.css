@@ -1,0 +1,24 @@
+.productCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem;
+  border-radius: 10px;
+  padding: 1rem;
+}
+.productCard:hover {
+  background-color: var(--lightlightYellow);
+  cursor: pointer;
+}
+.productCard-name {
+  font-weight: bold;
+}
+.productCard-img {
+  width: 10rem;
+  height: 12rem;
+  border-radius: 5px;
+  object-fit: cover;
+}
+.productCard-price {
+  margin: 0.5rem;
+}

@@ -1,5 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Raleway:wght@500&display=swap");
 .App {
   text-align: center;
+  margin: 0;
+  padding: 0;
 }
 
 .App-logo {
@@ -35,4 +38,17 @@
   to {
     transform: rotate(360deg);
   }
+}
+:root {
+  --blueDark: #003554;
+  --blue: #4e5170;
+  --blueLight: #918195;
+  --lightGreen: #c8bac0;
+  --lightYellow: #e9e7e7;
+  --lightGray: #cac6c5;
+  --lightlightYellow: #f3f3f3;
+  --darkDarkBlue: #0664a4;
+  --ErrorColor: #730018;
+  --FM-Quicksand: "Quicksand", sans-serif;
+  --FM-Raleway: "Raleway", sans-serif;
 }

@@ -1,0 +1,25 @@
+.navbarContainer {
+  background-color: var(--blueDark);
+  border-bottom: 2px solid var(--blueLight);
+}
+.navbarContainer li {
+  font-family: var(--FM-Quicksand);
+  font-weight: bolder;
+}
+.btnNavbar {
+  font-family: var(--FM-Quicksand);
+  border: none;
+  border-radius: 10%;
+  background-color: var(--darkDarkBlue);
+  color: #fff;
+  font-weight: bold;
+}
+.btnNavbar:hover {
+  background-color: var(--lightGray);
+  color: var(--darkDarkBlue);
+  outline: 1px solid var(--darkDarkBlue);
+}
+.sharknet-logo {
+  width: 4rem;
+  margin-left: 2rem;
+}
