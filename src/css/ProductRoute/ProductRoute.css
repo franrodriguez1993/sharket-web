@@ -153,7 +153,20 @@
 .p-repu-noScored {
   font-weight: 600;
 }
-/**  COMMENTS SECTION   **/
+
+/**  --------------------FAVORITE SECTION -----------------------  **/
+
+.productRoute-favorite_container {
+  width: 80%;
+  background-color: #fff;
+  border-radius: 10px;
+}
+.productRoute-favorite_heart {
+  width: 2.5rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+/**  --------------------COMMENTS SECTION -----------------------  **/
 
 .commentData-container {
   margin: 3rem;

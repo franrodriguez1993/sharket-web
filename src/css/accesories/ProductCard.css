@@ -2,14 +2,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   margin: 1rem;
   border-radius: 10px;
   padding: 1rem;
+  max-width: 14rem;
+  height: 24rem;
 }
 .productCard:hover {
   background-color: var(--lightlightYellow);
   cursor: pointer;
 }
+.productCard-container_name {
+  align-self: flex-start;
+  height: 4rem;
+}
+
 .productCard-name {
   font-weight: bold;
 }
@@ -18,6 +26,12 @@
   height: 12rem;
   border-radius: 5px;
   object-fit: cover;
+  align-self: center;
+}
+
+.productCard-container_desc {
+  position: relative;
+  bottom: 0%;
 }
 .productCard-price {
   margin: 0.5rem;

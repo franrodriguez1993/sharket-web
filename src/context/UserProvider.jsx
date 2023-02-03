@@ -8,7 +8,7 @@ const UserContext = createContext();
 const UserProvider = (props) => {
   const [user, setUser] = useState(undefined);
   const [token, setToken] = useState("");
-  const [loadingPage, setLoadingPage] = useState(false);
+  const [loadingPage, setLoadingPage] = useState(true);
 
   function logIn(id, jwt, refreshToken = undefined) {
     setLoadingPage(true);
@@ -36,7 +36,7 @@ const UserProvider = (props) => {
 
   useEffect(() => {
     const refreshToken = cookieManager.get("refreshSharknet");
-    if (!refreshToken) return;
+    if (!refreshToken) return setLoadingPage(false);
     //Si existe un token de sesión pedimos los datos al servidor:
     FetchApi.refreshLogin(`${URL_API}/user/session`, { refreshToken }).then(
       (res) => {

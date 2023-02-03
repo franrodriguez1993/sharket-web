@@ -1,27 +1,30 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer, useContext } from "react";
 import { useParams } from "react-router-dom";
-import "../css/ProductRoute/ProductRoute.css";
+import "../../css/ProductRoute/ProductRoute.css";
 //Fetch:
-import { URL_API } from "../utils/URL";
-import ManageFetch from "../utils/manageFetch";
+import { URL_API } from "../../utils/URL";
+import ManageFetch from "../../utils/manageFetch";
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //Reducer:
 import {
   productRouteReducer,
   initialState,
-} from "../reducers/reducer/productRouteReducer";
-import TYPES_PRODUCTROUTE from "../reducers/types/productRouteTypes";
+} from "../../reducers/reducer/productRouteReducer";
+import TYPES_PRODUCTROUTE from "../../reducers/types/productRouteTypes";
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //Components:
-import ProductData from "../components/productRoute/ProductData";
-import SellerData from "../components/productRoute/SellerData";
-import CommentSection from "../components/productRoute/CommentSection";
-import SectionLoader from "../components/accesories/SectionLoader";
-import SimilarProducts from "../components/productRoute/SimilarProducts";
-import SellerProducts from "../components/productRoute/SellerProducts";
-
+import ProductData from "../../components/productRoute/ProductData";
+import SellerData from "../../components/productRoute/SellerData";
+import CommentSection from "../../components/productRoute/CommentSection";
+import SectionLoader from "../../components/accesories/SectionLoader";
+import SimilarProducts from "../../components/productRoute/SimilarProducts";
+import SellerProducts from "../../components/productRoute/SellerProducts";
+import FavoriteSection from "../../components/productRoute/FavoriteSection";
+import { UserContext } from "../../context/UserProvider";
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 const ProductRoute = () => {
+  const { user } = useContext(UserContext);
   const { id } = useParams();
   const { FetchFunction } = ManageFetch();
   const [productStates, dispatch] = useReducer(
@@ -41,6 +44,8 @@ const ProductRoute = () => {
     loadingReputationSeller,
     reputationSeller,
     sellerProducts,
+    favorites,
+    loadingFavOperation,
   } = productStates;
 
   /** USE EFFECT PRODUCT  **/
@@ -59,6 +64,14 @@ const ProductRoute = () => {
         getReputationSeller(res.data.user.user_id);
         //get seller products:
         getSellerProducts(res.data.user.user_id);
+
+        //setting favorites:
+        if (user) {
+          dispatch({
+            type: TYPES_PRODUCTROUTE.setFavorites,
+            payload: user.product_favorites,
+          });
+        }
       } else if (res.status === 404) {
         dispatch({
           type: TYPES_PRODUCTROUTE.error,
@@ -119,7 +132,6 @@ const ProductRoute = () => {
     FetchFunction({ url }).then((res) => {
       if (!res) return;
       if (res.status === 200) {
-        console.log(res.data);
         dispatch({
           type: TYPES_PRODUCTROUTE.sellerProductsData,
           payload: res.data.products,
@@ -127,6 +139,28 @@ const ProductRoute = () => {
       }
     });
   }
+
+  /**  ------  HANDLE FAVORITE  ------  **/
+  const makeFavProduct = (e) => {
+    e.preventDefault();
+    const url = `${URL_API}/product/favorite`;
+    const body = { user: user.user_id, product: product.product_id };
+    dispatch({ type: TYPES_PRODUCTROUTE.loadingFavOperation });
+    FetchFunction({ url, body, method: "POST" }).then((res) => {
+      if (!res) return;
+      else if (res.status === 201) {
+        dispatch({
+          type: TYPES_PRODUCTROUTE.addNewFavorite,
+          payload: product.product_id,
+        });
+      } else if (res.status === 200) {
+        dispatch({
+          type: TYPES_PRODUCTROUTE.removeOneFavorite,
+          payload: product.product_id,
+        });
+      }
+    });
+  };
 
   return (
     <div className="ProductRoute-container">
@@ -145,6 +179,19 @@ const ProductRoute = () => {
                 />
               </section>
 
+              {/**  FAVORITE SECTION **/}
+              {user && (
+                <>
+                  {product.user.user_id !== user.user_id && (
+                    <FavoriteSection
+                      userFavorites={favorites}
+                      product={product.product_id}
+                      loadingFavOperation={loadingFavOperation}
+                      makeFavProduct={makeFavProduct}
+                    />
+                  )}
+                </>
+              )}
               {/**  COMMENTS SECTION **/}
               {comments.length !== 0 && (
                 <CommentSection

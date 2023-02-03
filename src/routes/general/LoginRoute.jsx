@@ -1,23 +1,30 @@
-import React from "react";
-import "../css/LoginRoute/LoginRoute.css";
-//Importamos el hooks personalizado del login:
-import useLogin from "../hooks/useLogin";
-//Importamos el Loader:
-import Loader from "../components/accesories/Loader";
-//Initial State:
+import React, { useContext, useEffect } from "react";
+import "../../css/LoginRoute/LoginRoute.css";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserProvider";
+//Hook:
+import useLogin from "../../hooks/useLogin";
+//Components:
+import Loader from "../../components/accesories/Loader";
+
 const initialState = {
   mail: "",
   password: "",
 };
 
 const LoginRoute = () => {
-  //destructuramos las variables y funciones que nos brinda:
   const { form, error, loginLoading, handleChange, handleSubmitLogin } =
     useLogin(initialState);
+  const navigate = useNavigate();
+  const { user } = useContext(UserContext);
+
+  useEffect(() => {
+    if (user) return navigate("/");
+  }, [user]);
 
   return (
-    <div className="loginRoute">
-      <h1>Login</h1>
+    <div className="loginRoute-container">
+      <h1 className="loginRoute-title">Login</h1>
 
       {/* Formulario de Login  */}
       <form className="form-login" onSubmit={handleSubmitLogin}>

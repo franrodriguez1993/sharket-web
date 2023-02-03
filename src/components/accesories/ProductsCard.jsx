@@ -10,20 +10,24 @@ const ProductsCard = ({ product }) => {
   };
   return (
     <article className="productCard" onClick={handleClick}>
-      <h5 className="productCard-name">{product.product_name}</h5>
+      <div className="productCard-container_name">
+        <h5 className="productCard-name">{product.product_name}</h5>
+      </div>
       <img
         src="/assets/img/default.jpg"
         alt="product-image"
         className="productCard-img"
       />
-      <p className="productCard-price">
-        <b>Price: $</b>
-        {product.product_price}
-      </p>
-      <p className="productCard-price">
-        <b>Status: </b>
-        {product.product_status}
-      </p>
+      <div className="productCard-container_desc">
+        <p className="productCard-price">
+          <b>Price: $</b>
+          {product.product_price}
+        </p>
+        <p className="productCard-price">
+          <b>Status: </b>
+          {product.product_status}
+        </p>
+      </div>
     </article>
   );
 };

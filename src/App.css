@@ -3,6 +3,8 @@
   text-align: center;
   margin: 0;
   padding: 0;
+  background-color: var(--lightGray);
+  font-family: var(--FM-Quicksand);
 }
 
 .App-logo {
@@ -49,6 +51,9 @@
   --lightlightYellow: #f3f3f3;
   --darkDarkBlue: #0664a4;
   --ErrorColor: #730018;
+  --ErrorColorLight: #db000a;
+  --SuccessColor: #0a7819;
+  --SuccessLightColor: #1fac33;
   --FM-Quicksand: "Quicksand", sans-serif;
   --FM-Raleway: "Raleway", sans-serif;
 }

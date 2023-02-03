@@ -1,0 +1,119 @@
+.sellProduct-container {
+  background-color: var(--lightGray);
+  min-height: 100vh;
+  padding: 1rem;
+}
+.sellProduct-title {
+  margin-top: 2rem;
+  font-weight: bold;
+}
+
+/**   SELL PRODUCT FORM   **/
+
+.sellForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem;
+  background-color: #fff;
+  border-radius: 15px;
+}
+
+.sellForm-label {
+  font-weight: bold;
+  margin: 0.5rem;
+}
+.sellForm-input,
+.sellForm-textarea {
+  width: 35rem;
+  height: 2rem;
+  margin: 0.5rem;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--lightGreen);
+  color: var(--blueDark);
+  font-weight: bolder;
+}
+.sellForm-textarea {
+  width: 35rem;
+  height: 20rem;
+  resize: none;
+}
+.sellForm-input_error {
+  outline: 2px solid red;
+}
+.sellForm-error_p {
+  font-weight: bold;
+  color: red;
+}
+.sellForm-previewImg_container {
+  width: 15rem;
+}
+.sellForm-previewImg_img {
+  width: 15rem;
+  margin: 1rem;
+  border-radius: 10px;
+}
+.sellForm-previewImg_cross {
+  width: 3rem;
+  position: relative;
+  bottom: 10%;
+  left: 70%;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.sellForm--button {
+  margin: 2rem;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--SuccessColor);
+  color: #fff;
+  font-weight: bolder;
+}
+.sellForm--button:hover {
+  background-color: var(--SuccessLightColor);
+  overflow: 2px solid var(--SuccessColor);
+}
+
+/**  MODAL   **/
+
+.sellProduct-Modal {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.7567401960784313) 0%,
+    rgba(26, 26, 29, 0.6699054621848739) 0%,
+    rgba(0, 0, 0, 0.7259278711484594) 100%
+  );
+  z-index: 10000;
+}
+.sellProduct-Modal_text {
+  margin-top: 1rem;
+  font-weight: bolder;
+  color: var(--lightYellow);
+}
+
+/**  ERROR SECTION **/
+.sellProduct-error {
+  width: 90%;
+  background-color: var(--ErrorColorLight);
+  border-radius: 10px;
+  margin: auto;
+  padding: 1rem;
+}
+
+.sellProduct-error_text {
+  font-weight: bolder;
+  color: var(--lightYellow);
+}

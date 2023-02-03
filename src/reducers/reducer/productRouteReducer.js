@@ -7,6 +7,7 @@ export const initialState = {
   loadingComments: false,
   loadingSimilarProducts: false,
   loadingReputationSeller: false,
+  loadingFavOperation: false,
   error: "",
   comments: [],
   commentTotalPage: 1,
@@ -15,6 +16,7 @@ export const initialState = {
   similarProducts: [],
   sellerProducts: [],
   reputationSeller: [],
+  favorites: [],
 };
 
 /**  ---------- REDUCER ----------  **/
@@ -88,6 +90,35 @@ export const productRouteReducer = (state, action) => {
     /** LOADING REPUTATION SELLER **/
     case TYPES_PRODUCTROUTE.sellerProductsData:
       return { ...state, sellerProducts: action.payload };
+
+    /** FAVORITES **/
+    case TYPES_PRODUCTROUTE.setFavorites:
+      return {
+        ...state,
+        loadingFavOperation: false,
+        favorites: action.payload,
+      };
+    /**  LOADING FAV OPERATION **/
+    case TYPES_PRODUCTROUTE.loadingFavOperation:
+      return { ...state, loadingFavOperation: true };
+
+    /**  ADD NEW FAVORITE **/
+    case TYPES_PRODUCTROUTE.addNewFavorite:
+      return {
+        ...state,
+        loadingFavOperation: false,
+        favorites: [...state.favorites, { product_id: action.payload }],
+      };
+
+    /**  REMOVE FAVORITE **/
+    case TYPES_PRODUCTROUTE.removeOneFavorite:
+      return {
+        ...state,
+        loadingFavOperation: false,
+        favorites: state.favorites.filter(
+          (i) => i.product_id != action.payload
+        ),
+      };
     default:
       return state;
   }

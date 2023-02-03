@@ -1,22 +1,22 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import "../css/SearchRoute/SearchRoute.css";
+import "../../css/SearchRoute/SearchRoute.css";
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //Fetchs:
-import { URL_API } from "../utils/URL";
-import ManageFetch from "../utils/manageFetch";
+import { URL_API } from "../../utils/URL";
+import ManageFetch from "../../utils/manageFetch";
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //Reducers:
 import {
   searchRouteReducer,
   initialState,
-} from "../reducers/reducer/searchRouteReducer";
-import { TYPES_SEARCHROUTE } from "../reducers/types/searchRouteType";
+} from "../../reducers/reducer/searchRouteReducer";
+import { TYPES_SEARCHROUTE } from "../../reducers/types/searchRouteType";
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //Components:
-import ProductRowCard from "../components/SearchRoute/ProductRowCard";
-import SectionLoader from "../components/accesories/SectionLoader";
-import ParamSection from "../components/SearchRoute/ParamSection";
+import ProductRowCard from "../../components/SearchRoute/ProductRowCard";
+import SectionLoader from "../../components/accesories/SectionLoader";
+import ParamSection from "../../components/SearchRoute/ParamSection";
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 const SearchRoute = () => {
