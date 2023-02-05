@@ -5,7 +5,9 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <Outlet />
+      <div className="outline">
+        <Outlet />
+      </div>
     </div>
   );
 }

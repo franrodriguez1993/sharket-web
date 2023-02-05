@@ -13,11 +13,20 @@ const ProductsCard = ({ product }) => {
       <div className="productCard-container_name">
         <h5 className="productCard-name">{product.product_name}</h5>
       </div>
-      <img
-        src="/assets/img/default.jpg"
-        alt="product-image"
-        className="productCard-img"
-      />
+      {/** PRODUCT IMG **/}
+      {product.product_thumbnail ? (
+        <img
+          src={product.product_thumbnail}
+          alt="product-image"
+          className="productCard-img"
+        />
+      ) : (
+        <img
+          src="/assets/img/default.jpg"
+          alt="product-image"
+          className="productCard-img"
+        />
+      )}
       <div className="productCard-container_desc">
         <p className="productCard-price">
           <b>Price: $</b>

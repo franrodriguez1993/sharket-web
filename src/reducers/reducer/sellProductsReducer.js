@@ -14,8 +14,11 @@ export const initialState = {
     warranty: 0,
     address: "",
     category: "",
+    offer: 0,
   },
   image: { preview: "", data: "" },
+  descriptionImage: { preview: "", data: "" },
+  productImages: [],
   loading: false,
   errors: {},
   errorFetch: "",
@@ -72,10 +75,16 @@ export const sellProductReducer = (state, action) => {
     case TYPES_SELLPRODUCTS.handleFileChange:
       return { ...state, image: action.payload };
 
+    /**  HANDLE FILE CHANGE (DESCRIPTION IMAGE)  **/
+    case TYPES_SELLPRODUCTS.handleFileChangeDI:
+      return { ...state, descriptionImage: action.payload };
     /**    RESET IMG FILE   **/
     case TYPES_SELLPRODUCTS.resetImgFile:
       return { ...state, image: { preview: "", data: "" } };
 
+    /**  RESET IMG DESCRIPTION FILE ***/
+    case TYPES_SELLPRODUCTS.resetImgDescrFile:
+      return { ...state, descriptionImage: { preview: "", data: "" } };
     /**   SET ERROR FORM   **/
     case TYPES_SELLPRODUCTS.setErrorForm:
       return { ...state, errors: action.payload };
@@ -87,6 +96,39 @@ export const sellProductReducer = (state, action) => {
     /**   SET LOADING  **/
     case TYPES_SELLPRODUCTS.setLoading:
       return { ...state, loading: true };
+
+    /**  SET DATA FORM EDIT    **/
+    case TYPES_SELLPRODUCTS.setDataFormEdit:
+      return { ...state, form: action.payload };
+
+    /**    SET IMAGE THUMBNAIL DATA    **/
+    case TYPES_SELLPRODUCTS.setImageThumbnailData:
+      return { ...state, image: action.payload };
+
+    /** SET PRODUCT IMAGES  **/
+    case TYPES_SELLPRODUCTS.setProductImages:
+      return { ...state, productImages: action.payload };
+
+    /** ADD PRODUCT IMAGES  **/
+    case TYPES_SELLPRODUCTS.addProductImage:
+      return {
+        ...state,
+        loading: false,
+        productImages: [
+          ...state.productImages,
+          { ip_id: action.payload.ip_id, ip_path: action.payload.ip_path },
+        ],
+      };
+
+    /** DELETE PRODUCT IMAGES  **/
+    case TYPES_SELLPRODUCTS.deleteProductImage:
+      return {
+        ...state,
+        loading: false,
+        productImages: state.productImages.filter(
+          (i) => i.ip_id !== action.payload
+        ),
+      };
     default:
       return state;
   }

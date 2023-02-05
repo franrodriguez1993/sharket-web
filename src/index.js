@@ -12,6 +12,8 @@ import ProductRoute from "./routes/products/ProductRoute";
 import ErrorPage from "./routes/general/ErrorPage";
 import ProductsRoute from "./routes/products/ProductsRoute";
 import SellProductRoute from "./routes/products/SellProductRoute";
+import MyProductsRoute from "./routes/products/MyProductsRoute";
+import EditProductRoute from "./routes/products/EditProductRoute";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -30,13 +32,22 @@ root.render(
             {/** ----------- PRODUCTOS -----------  **/}
             <Route path="/products" element={<ProductsRoute />} />
             <Route
-              path="/products/sell"
+              path="/products/user/:id"
+              element={
+                <VerifyAccess>
+                  <MyProductsRoute />
+                </VerifyAccess>
+              }
+            />
+            <Route
+              path="/products/publish"
               element={
                 <VerifyAccess>
                   <SellProductRoute />
                 </VerifyAccess>
               }
             />
+            <Route path="/products/edit/:id" element={<EditProductRoute />} />
 
             {/** ---------- PRODUCTO INDIVIDUAL ----------**/}
             <Route path="/product/:id" element={<ProductRoute />} />

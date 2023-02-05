@@ -128,7 +128,7 @@ const ProductRoute = () => {
   }
   /** GET SELLER PRODUCTS**/
   function getSellerProducts(id) {
-    const url = `${URL_API}/product/list/user/${id}?size=4`;
+    const url = `${URL_API}/product/list/seller/${id}?size=4`;
     FetchFunction({ url }).then((res) => {
       if (!res) return;
       if (res.status === 200) {

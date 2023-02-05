@@ -51,9 +51,9 @@ const SellProductRoute = () => {
 
       {/**  MODAL LOADING   **/}
       {loading && (
-        <div className="sellProduct-Modal">
+        <div className="modal-container">
           <SectionLoader />
-          <p className="sellProduct-Modal_text">Creating Product...</p>
+          <p className="modal-text ">Creating Product...</p>
         </div>
       )}
     </div>

@@ -13,11 +13,15 @@ const SellerData = ({
   return (
     <article className="sellerData-container">
       <div>
-        <img
-          src="/assets/img/userDefault.png"
-          alt="user-img"
-          className="seller-img"
-        />
+        {seller.user_image ? (
+          <img src={seller.user_image} alt="user-img" className="seller-img" />
+        ) : (
+          <img
+            src="/assets/img/userDefault.png"
+            alt="user-img"
+            className="seller-img"
+          />
+        )}
         {seller.Rol.rol_name === "store" && (
           <img src={verified} alt="verified-user" className="verified-img" />
         )}
@@ -43,4 +47,4 @@ const SellerData = ({
   );
 };
 
-export default SellerData;
+export default React.memo(SellerData);

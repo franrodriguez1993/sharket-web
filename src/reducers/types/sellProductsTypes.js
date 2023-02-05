@@ -11,8 +11,15 @@ const TYPES_SELLPRODUCTS = {
   resetForm: "reset-form",
   filterTypesByCategory: "filter-types-by-category",
   handleFileChange: "handle-file-change",
+  handleFileChangeDI: "handle-file-change-descrImage",
+  setImageThumbnailData: "set-image-thumbnail-data",
   resetImgFile: "reset-img-file",
+  resetImgDescrFile: "reset-img-descr-file",
   setErrorForm: "set-error-form",
   setErrorFetch: "set-error-fetch",
+  setDataFormEdit: "set-data-form-edit",
+  setProductImages: "set-product-images",
+  addProductImage: "Add-product-image-desc",
+  deleteProductImage: "delete-product-image-desc",
 };
 export default TYPES_SELLPRODUCTS;

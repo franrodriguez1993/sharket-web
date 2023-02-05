@@ -29,23 +29,28 @@ const ProductsRoute = () => {
     });
   }, []);
   return (
-    <div className="ProductsRoute-container">
+    <div className="routeContainer">
       {/**  NAVBAR PARA USERS **/}
       {user && (
         <>
           {(user.Rol.rol_name === "user" || user.Rol.rol_name === "store") && (
             <nav className="ProductsRoute-nav">
               <div className="ProductsRoute-nav_info">
-                <button className="pr-nav_btn--info">My products</button>
+                <button
+                  className="pr-nav_btn--info"
+                  onClick={() => navigate(`/products/user/${user.user_id}`)}
+                >
+                  My products
+                </button>
                 <button className="pr-nav_btn--info">View sells</button>
                 <button className="pr-nav_btn--info">View Buys</button>
               </div>
               <div className="ProductsRoute-nav_new">
                 <button
                   className="pr-nav_btn--new"
-                  onClick={() => navigate("/products/sell")}
+                  onClick={() => navigate("/products/publish")}
                 >
-                  Sell new product
+                  Publish new
                 </button>
               </div>
             </nav>

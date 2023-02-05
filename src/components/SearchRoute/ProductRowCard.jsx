@@ -11,7 +11,7 @@ const ProductRowCard = ({ product }) => {
       onClick={() => navigate(`/product/${product.product_id}`)}
     >
       <td className="productRow-td">
-        {/* {product.product_thumbnail ? (
+        {product.product_thumbnail ? (
           <img
             src={product.product_thumbnail}
             alt="product-image"
@@ -23,12 +23,7 @@ const ProductRowCard = ({ product }) => {
             alt="product-image"
             className="productRow-img"
           />
-        )} */}
-        <img
-          src="/assets/img/default.jpg"
-          alt="product-image"
-          className="productRow-img"
-        />
+        )}
       </td>
       <td className="productRow-td">{product.product_name}</td>
       <td className="productRow-td">{product.product_brand}</td>

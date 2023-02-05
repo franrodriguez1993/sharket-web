@@ -20,7 +20,11 @@ const ProductData = ({ product }) => {
       {/**  DATA PRODUCT AND IMAGE **/}
       <section className="productData-p_and_i">
         <div className="productData-container-img">
-          <img src="/assets/img/default.jpg" alt="" />
+          {product.product_thumbnail ? (
+            <img src={product.product_thumbnail} alt="" />
+          ) : (
+            <img src="/assets/img/default.jpg" alt="" />
+          )}
         </div>
         <div className="productData-container-data">
           <h1>{product.product_name}</h1>
@@ -61,7 +65,7 @@ const ProductData = ({ product }) => {
           <section className="productData-moreImage">
             {product.image_products.map((i) => (
               <img
-                src="/assets/img/default.jpg"
+                src={i.ip_path || "/assets/img/default.jpg"}
                 alt="image-product"
                 key={i.ip_id}
                 onClick={() => handleModalImg(i.ip_path)}

@@ -5,7 +5,7 @@ const ModalImage = ({ img, closeModal }) => {
     <div className="ModalImage-container">
       <img src={cross} alt="cross" className="cross-svg" onClick={closeModal} />
       <img
-        src="/assets/img/default.jpg"
+        src={img || "/assets/img/default.jpg"}
         alt="image-modal"
         className="ModalImage-img"
       />
