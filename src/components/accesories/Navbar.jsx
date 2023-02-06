@@ -60,10 +60,19 @@ const Navbar = () => {
                   Products
                 </NavLink>
               </li>
-
               {/** ------------------ Dinamic content ------------------   **/}
               {user ? (
                 <>
+                  <li>
+                    <NavLink
+                      className="nav-link active text-light fw-bolder"
+                      aria-current="page"
+                      to="/"
+                    >
+                      {user.user_username}
+                    </NavLink>
+                  </li>
+
                   <li>
                     <NavLink
                       className="nav-link active text-light"
@@ -88,7 +97,6 @@ const Navbar = () => {
                   </li>
                 </>
               )}
-
               {/** ----------------- End Dinamic content ---------------   **/}
             </ul>
             <form className="d-flex" role="search" onSubmit={handleSearch}>

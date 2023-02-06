@@ -14,6 +14,8 @@ import ProductsRoute from "./routes/products/ProductsRoute";
 import SellProductRoute from "./routes/products/SellProductRoute";
 import MyProductsRoute from "./routes/products/MyProductsRoute";
 import EditProductRoute from "./routes/products/EditProductRoute";
+import ViewSalesRoute from "./routes/products/ViewSalesRoute";
+import ViewBuysRoute from "./routes/products/ViewBuysRoute";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -32,7 +34,7 @@ root.render(
             {/** ----------- PRODUCTOS -----------  **/}
             <Route path="/products" element={<ProductsRoute />} />
             <Route
-              path="/products/user/:id"
+              path="/products/user/list/:id"
               element={
                 <VerifyAccess>
                   <MyProductsRoute />
@@ -47,7 +49,24 @@ root.render(
                 </VerifyAccess>
               }
             />
-            <Route path="/products/edit/:id" element={<EditProductRoute />} />
+            <Route
+              path="/products/edit/:id"
+              element={
+                <VerifyAccess>
+                  <EditProductRoute />
+                </VerifyAccess>
+              }
+            />
+
+            <Route
+              path="/products/user/sales"
+              element={
+                <VerifyAccess>
+                  <ViewSalesRoute />
+                </VerifyAccess>
+              }
+            />
+            <Route path="/products/user/buys" element={<ViewBuysRoute />} />
 
             {/** ---------- PRODUCTO INDIVIDUAL ----------**/}
             <Route path="/product/:id" element={<ProductRoute />} />

@@ -11,6 +11,7 @@
 }
 :root {
   --blueDark: #003554;
+  --blueSoft: #3c789a;
   --blue: #4e5170;
   --blueLight: #918195;
   --lightGreen: #c8bac0;
@@ -91,10 +92,16 @@
   margin: 1rem;
 }
 
+.background-white {
+  background-color: #fff;
+}
+
 /**   ------------------ BUTTONS   ------------------   **/
 
 .button-blue,
 .button-warn,
+.button-success,
+.button-grayBlue,
 .button-no,
 .button-disable {
   margin: 0.5rem;
@@ -112,12 +119,19 @@
 .button-no {
   background-color: var(--ErrorColorLight);
 }
+.button-success {
+  background-color: var(--SuccessColor);
+}
 
+.button-grayBlue {
+  background-color: var(--blue);
+}
 .button-blue:hover {
   background-color: var(--lightGray);
   color: var(--darkDarkBlue);
   outline: 1px solid var(--darkDarkBlue);
 }
+
 .button-warn:hover {
   background-color: var(--warningLightColor);
   outline: 1px solid var(--warningColor);
@@ -125,6 +139,16 @@
 .button-no:hover {
   background-color: var(--ErrorColor);
   outline: 1px solid var(--ErrorColorLight);
+}
+
+.button-grayBlue:hover {
+  background-color: var(--blueLight);
+  outline: 1px solid var(--blue);
+}
+
+.button-success:hover {
+  background-color: var(--SuccessLightColor);
+  outline: 1px solid var(--SuccessColor);
 }
 .button-disable {
   cursor: default;

@@ -1,0 +1,39 @@
+.salesCard {
+  width: 100%;
+  min-height: 5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  background-color: var(--blueSoft);
+  border-top: 1px solid var(--blueLight);
+  border-bottom: 4px solid var(--blueLight);
+}
+.salesCard-buyer,
+.salesCard-product,
+.salesCard-amount,
+.salesCard-rate {
+  width: 10rem;
+  height: 100%;
+  text-align: start;
+}
+
+.salesCard-p {
+  color: var(--lightYellow);
+  font-weight: bolder;
+}
+
+.salesCard-b {
+  color: var(--blueDark);
+}
+
+/*    -------------   MEDIA QUERIES  ----------------     */
+
+@media (max-width: 750px) {
+  .salesCard {
+    flex-direction: column;
+    align-items: center;
+  }
+} ;

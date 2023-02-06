@@ -38,12 +38,24 @@ const ProductsRoute = () => {
               <div className="ProductsRoute-nav_info">
                 <button
                   className="pr-nav_btn--info"
-                  onClick={() => navigate(`/products/user/${user.user_id}`)}
+                  onClick={() =>
+                    navigate(`/products/user/list/${user.user_id}`)
+                  }
                 >
                   My products
                 </button>
-                <button className="pr-nav_btn--info">View sells</button>
-                <button className="pr-nav_btn--info">View Buys</button>
+                <button
+                  className="pr-nav_btn--info"
+                  onClick={() => navigate("/products/user/sales")}
+                >
+                  My sales
+                </button>
+                <button
+                  className="pr-nav_btn--info"
+                  onClick={() => navigate("/products/user/buys")}
+                >
+                  My buys
+                </button>
               </div>
               <div className="ProductsRoute-nav_new">
                 <button

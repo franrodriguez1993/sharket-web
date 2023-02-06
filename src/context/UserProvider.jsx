@@ -31,7 +31,7 @@ const UserProvider = (props) => {
   /** Función para desloguear al usuario  **/
   function logOut() {
     setUser(undefined);
-    cookieManager.remove("refreshToken");
+    cookieManager.remove("refreshSharknet");
   }
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const UserProvider = (props) => {
     FetchApi.refreshLogin(`${URL_API}/user/session`, { refreshToken }).then(
       (res) => {
         if (res.status !== 200) {
-          cookieManager.remove("refreshToken");
+          cookieManager.remove("refreshSharknet");
         } else {
           logIn(res.data.uid, res.data.token);
         }
