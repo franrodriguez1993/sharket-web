@@ -17,6 +17,7 @@ import {
 import BuysCard from "../../components/ViewSales&Buys/BuysCard";
 import SectionLoader from "../../components/accesories/SectionLoader";
 import ModalRate from "../../components/ViewSales&Buys/ModalRate";
+import ModalRateProduct from "../../components/ViewSales&Buys/ModalRateProduct";
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 const ViewBuysRoute = () => {
@@ -33,7 +34,10 @@ const ViewBuysRoute = () => {
     scores,
     page,
     modal,
+    modalProduct,
     form,
+    productForm,
+    errorModalProduct,
   } = states;
 
   /**   --------- USE EFFECT ---------   **/
@@ -74,6 +78,41 @@ const ViewBuysRoute = () => {
         });
       } else {
         dispatch({ type: TYPES_USERSALES.setError, payload: "Server error" });
+      }
+    });
+  };
+
+  /**  HANDLE RATE PRODUCT   **/
+  const handleRateProduct = (e) => {
+    e.preventDefault();
+    //Check for erros:
+    if (productForm.rs_id === "" || productForm.description.trim() === "") {
+      return dispatch({
+        type: TYPES_USERSALES.setErrorModalProduct,
+        payload: "You need to complete all the fields",
+      });
+    }
+    //Rating:
+    dispatch({ type: TYPES_USERSALES.setLoading });
+    dispatch({ type: TYPES_USERSALES.setCloseModalProduct });
+    const url = `${URL_API}/reputation/product/qualify`;
+
+    FetchFunction({ url, method: "POST", body: productForm }).then((res) => {
+      if (res.status === 201) {
+        //Update the sales:
+
+        dispatch({
+          type: TYPES_USERSALES.updateRatedProducts,
+          payload: {
+            sale_id: productForm.sale,
+            product_id: productForm.product,
+          },
+        });
+      } else {
+        dispatch({
+          type: TYPES_USERSALES.setError,
+          payload: "Server error",
+        });
       }
     });
   };
@@ -137,7 +176,7 @@ const ViewBuysRoute = () => {
         )}
       </section>
 
-      {/**  MODAL RATE    **/}
+      {/**  MODAL RATE  USER  **/}
 
       {modal && (
         <ModalRate
@@ -148,8 +187,19 @@ const ViewBuysRoute = () => {
           errorModal={errorModal}
         />
       )}
+
+      {/**  MODAL RATE  PRODUCT   **/}
+      {modalProduct && (
+        <ModalRateProduct
+          scores={scores}
+          dispatch={dispatch}
+          formProduct={productForm}
+          handleRateProduct={handleRateProduct}
+          errorModalProduct={errorModalProduct}
+        />
+      )}
     </div>
   );
 };
 
-export default ViewBuysRoute;
+export default React.memo(ViewBuysRoute);

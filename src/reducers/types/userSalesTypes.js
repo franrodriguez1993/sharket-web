@@ -7,13 +7,19 @@ const TYPES_USERSALES = {
   setBackPage: "set-back-page",
   setNextPage: "set-next-page",
   setScores: "set-scores",
-  setModal: "set-modal",
+  setModal: "set-modal-user-rate",
+  setModalProduct: "set-modal-product-rate",
+  setCloseModalProduct: "set-close-modal-product",
   setCloseModal: "set-close-modal",
   setForm: "set-form",
   setHandleChange: "set-handle-change",
+  setHandleChangeProduct: "set-handle-Change-Product",
   updateRatedSales: "set-update-rated-sales",
   updateRatedBuys: "set-update-rated-buys",
+  updateRatedProducts: "set-update-rated-products",
   setErrorModal: "set-error-modal",
+  setErrorModalProduct: "set-error-modal-product",
+  setProductForm: "set-product-form",
 };
 
 export default TYPES_USERSALES;

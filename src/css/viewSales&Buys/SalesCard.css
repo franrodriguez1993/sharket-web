@@ -20,6 +20,12 @@
   text-align: start;
 }
 
+.salesCard-rate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .salesCard-p {
   color: var(--lightYellow);
   font-weight: bolder;
