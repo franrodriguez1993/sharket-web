@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
 import "../../css/accesories/Navbar.css";
 import ModalLoaderPage from "./ModalLoaderPage";
+import userIcon from "../../svg/user_icon.svg";
 const Navbar = () => {
   const navigate = useNavigate();
   const { user, logOut, loadingPage } = useContext(UserContext);
@@ -65,16 +66,6 @@ const Navbar = () => {
                 <>
                   <li>
                     <NavLink
-                      className="nav-link active text-light fw-bolder"
-                      aria-current="page"
-                      to="/"
-                    >
-                      {user.user_username}
-                    </NavLink>
-                  </li>
-
-                  <li>
-                    <NavLink
                       className="nav-link active text-light"
                       aria-current="page"
                       to="/"
@@ -90,6 +81,15 @@ const Navbar = () => {
                     <NavLink
                       className="nav-link active text-light"
                       aria-current="page"
+                      to="register"
+                    >
+                      Register
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink
+                      className="nav-link active text-light"
+                      aria-current="page"
                       to="login"
                     >
                       Login
@@ -99,6 +99,7 @@ const Navbar = () => {
               )}
               {/** ----------------- End Dinamic content ---------------   **/}
             </ul>
+
             <form className="d-flex" role="search" onSubmit={handleSearch}>
               <input
                 className="form-control me-2"
@@ -112,6 +113,21 @@ const Navbar = () => {
                 Search
               </button>
             </form>
+
+            <ul className="navbar-nav ms-5 me-5 mb-2 mb-lg-0">
+              {user && (
+                <li className="nav-li_userIcon">
+                  <img src={userIcon} alt="" className="navbar-userIcon" />
+                  <NavLink
+                    className="nav-link active text-light fw-bolder"
+                    aria-current="page"
+                    to="/"
+                  >
+                    {user.user_username}
+                  </NavLink>
+                </li>
+              )}
+            </ul>
           </div>
         </div>
       </nav>

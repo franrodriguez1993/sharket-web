@@ -16,6 +16,7 @@ import MyProductsRoute from "./routes/products/MyProductsRoute";
 import EditProductRoute from "./routes/products/EditProductRoute";
 import ViewSalesRoute from "./routes/products/ViewSalesRoute";
 import ViewBuysRoute from "./routes/products/ViewBuysRoute";
+import RegisterRoute from "./routes/general/RegisterRoute";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -26,9 +27,8 @@ root.render(
           <Route path="/" element={<App />}>
             <Route index element={<HomeRoute />} />
             <Route path="/error" element={<ErrorPage />} />
-
             <Route path="/login" element={<LoginRoute />} />
-
+            <Route path="/register" element={<RegisterRoute />} />
             <Route path="/search/:search" element={<SearchRoute />} />
 
             {/** ----------- PRODUCTOS -----------  **/}

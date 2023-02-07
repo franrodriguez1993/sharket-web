@@ -19,11 +19,6 @@
   border-radius: 15px;
 }
 
-.sellForm-label {
-  font-weight: bold;
-  margin: 0.5rem;
-}
-.sellForm-input,
 .sellForm-textarea {
   width: 35rem;
   height: 2rem;
@@ -39,13 +34,7 @@
   height: 20rem;
   resize: none;
 }
-.sellForm-input_error {
-  outline: 2px solid red;
-}
-.sellForm-error_p {
-  font-weight: bold;
-  color: red;
-}
+
 .sellForm-previewImg_container {
   width: 15rem;
 }

@@ -6,6 +6,15 @@
   font-family: var(--FM-Quicksand);
   font-weight: bolder;
 }
+.nav-li_userIcon {
+  display: flex;
+  cursor: pointer;
+}
+
+.navbar-userIcon {
+  width: 1.5rem;
+}
+
 .btnNavbar {
   font-family: var(--FM-Quicksand);
   border: none;

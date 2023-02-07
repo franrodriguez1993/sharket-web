@@ -21,6 +21,7 @@
   --darkDarkBlue: #0664a4;
   --ErrorColor: #730018;
   --ErrorColorLight: #db000a;
+  --ErrorColorUltraLight: #feb4b4;
   --SuccessColor: #0a7819;
   --SuccessLightColor: #1fac33;
   --warningColor: #d5b212;
@@ -29,13 +30,14 @@
   --FM-Raleway: "Raleway", sans-serif;
 }
 
-/**  GENERAL CLASSES  **/
+/** ============================== GENERAL CLASSES ============================== **/
 
 .routeContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .title {
   margin-top: 1rem;
   font-weight: bolder;
@@ -48,7 +50,7 @@
   border-radius: 10px;
 }
 
-/**containers:**/
+/**   ------------------ CONTAINERS   ------------------   **/
 
 .container-cards {
   width: 90%;
@@ -94,6 +96,31 @@
 
 .background-white {
   background-color: #fff;
+}
+
+/**   ------------------ FORMS   ------------------   **/
+.form_label {
+  font-weight: bold;
+  margin: 0.5rem;
+}
+.form_input {
+  width: 35rem;
+  height: 2rem;
+  margin: 0.5rem;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--lightGreen);
+  color: var(--blueDark);
+  font-weight: bolder;
+}
+
+.form_input-error {
+  outline: 2px solid red;
+}
+
+.form_input-error--p {
+  font-weight: bold;
+  color: red;
 }
 
 /**   ------------------ BUTTONS   ------------------   **/
@@ -171,14 +198,33 @@
 /**    CONTAINER ERRORS     **/
 
 .alert-error-container {
-  padding: 1rem;
+  padding: 0.4rem 1rem;
+  margin: 1rem 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: var(--ErrorColorUltraLight);
+  border-radius: 10px;
 }
 .text-error {
   font-weight: bolder;
   color: var(--ErrorColorLight);
+}
+
+/**    CONTAINER SUCCESS       **/
+.alert-success-container {
+  padding: 0.4rem 1rem;
+  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--SuccessLightColor);
+  border-radius: 10px;
+}
+
+.text-alert-success {
+  font-weight: bolder;
+  color: var(--lightGreen);
 }
 
 /**           MODAL CONTAINERS          **/
@@ -205,4 +251,14 @@
   margin-top: 1rem;
   font-weight: bolder;
   color: var(--lightYellow);
+}
+
+/*       -------------- MEDIA QUERIES --------------        */
+
+@media (max-width: 750px) {
+  /**FORM **/
+
+  .form_input {
+    width: 80%;
+  }
 }

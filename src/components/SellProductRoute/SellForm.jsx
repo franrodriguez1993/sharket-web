@@ -18,15 +18,13 @@ const SellForm = ({
   return (
     <form className="sellForm" onSubmit={handleSellProduct}>
       {/** ---- CATEGORY ----  **/}
-      <label htmlFor="category" className="sellForm-label">
+      <label htmlFor="category" className="form_label">
         Category:
       </label>
       <select
         name="category"
         id="category"
-        className={`sellForm-input ${
-          errors.category && "sellForm-input_error"
-        }`}
+        className={`form_input  ${errors.category && "form_input-error"}`}
         onChange={(e) => {
           handleChange(e);
           if (e.target.value === "") {
@@ -49,16 +47,18 @@ const SellForm = ({
           ))}
       </select>
 
-      {errors.category && <p className="sellForm-error_p">{errors.category}</p>}
+      {errors.category && (
+        <p className="form_input-error--p">{errors.category}</p>
+      )}
 
       {/** ---- TYPES ----  **/}
-      <label htmlFor="type" className="sellForm-label">
+      <label htmlFor="type" className="form_label">
         Type:
       </label>
       <select
         name="type"
         id="type"
-        className={`sellForm-input ${errors.type && "sellForm-input_error"}`}
+        className={`form_input  ${errors.type && "form_input-error"}`}
         onChange={handleChange}
         value={form.type || ""}
       >
@@ -71,75 +71,76 @@ const SellForm = ({
           ))}
       </select>
 
-      {errors.type && <p className="sellForm-error_p">{errors.type}</p>}
+      {errors.type && <p className="form_input-error--p">{errors.type}</p>}
+
       {/** ---- NAME ----  **/}
-      <label htmlFor="name" className="sellForm-label">
+      <label htmlFor="name" className="form_label">
         Product name:
       </label>
       <input
         type="text"
         name="name"
         id="name"
-        className={`sellForm-input ${errors.name && "sellForm-input_error"}`}
+        className={`form_input  ${errors.name && "form_input-error"}`}
         onChange={handleChange}
         value={form.name || ""}
       />
-      {errors.name && <p className="sellForm-error_p">{errors.name}</p>}
+      {errors.name && <p className="form_input-error--p">{errors.name}</p>}
 
       {/** ---- BRAND ----  **/}
-      <label htmlFor="brand" className="sellForm-label">
+      <label htmlFor="brand" className="form_label">
         Brand:
       </label>
       <input
         type="text"
         name="brand"
         id="brand"
-        className={`sellForm-input ${errors.brand && "sellForm-input_error"}`}
+        className={`form_input  ${errors.brand && "form_input-error"}`}
         onChange={handleChange}
         value={form.brand || ""}
       />
-      {errors.brand && <p className="sellForm-error_p">{errors.brand}</p>}
+      {errors.brand && <p className="form_input-error--p">{errors.brand}</p>}
 
       {/** ---- PRICE ----  **/}
-      <label htmlFor="price" className="sellForm-label">
+      <label htmlFor="price" className="form_label">
         Price:
       </label>
       <input
         type="number"
         name="price"
         id="price"
-        className={`sellForm-input ${errors.price && "sellForm-input_error"}`}
+        className={`form_input  ${errors.price && "form_input-error"}`}
         onChange={handleChange}
         value={form.price || ""}
         min={1}
       />
 
-      {errors.price && <p className="sellForm-error_p">{errors.price}</p>}
+      {errors.price && <p className="form_input-error--p">{errors.price}</p>}
 
       {/** ---- STOCK ----  **/}
-      <label htmlFor="stock" className="sellForm-label">
+      <label htmlFor="stock" className="form_label">
         Stock:
       </label>
       <input
         type="number"
         name="stock"
         id="stock"
-        className={`sellForm-input ${errors.stock && "sellForm-input_error"}`}
+        className={`form_input  ${errors.stock && "form_input-error"}`}
         onChange={handleChange}
         value={form.stock || ""}
         min={1}
       />
 
-      {errors.stock && <p className="sellForm-error_p">{errors.stock}</p>}
+      {errors.stock && <p className="form_input-error--p">{errors.stock}</p>}
 
       {/** ---- STATUS ----  **/}
-      <label htmlFor="status" className="sellForm-label">
+      <label htmlFor="status" className="form_label">
         Status:
       </label>
       <select
         name="status"
         id="status"
-        className={`sellForm-input ${errors.status && "sellForm-input_error"}`}
+        className={`form_input  ${errors.status && "form_input-error"}`}
         onChange={handleChange}
         value={form.status || ""}
       >
@@ -148,10 +149,10 @@ const SellForm = ({
         <option value="used">used</option>
       </select>
 
-      {errors.status && <p className="sellForm-error_p">{errors.status}</p>}
+      {errors.status && <p className="form_input-error--p">{errors.status}</p>}
 
       {/** ---- WARRANTY ----  **/}
-      <label htmlFor="warranty" className="sellForm-label">
+      <label htmlFor="warranty" className="form_label">
         Warranty
       </label>
       <i>Warranty time in months</i>
@@ -159,24 +160,24 @@ const SellForm = ({
         type="number"
         name="warranty"
         id="warranty"
-        className={`sellForm-input ${
-          errors.warranty && "sellForm-input_error"
-        }`}
+        className={`form_input  ${errors.warranty && "form_input-error"}`}
         onChange={handleChange}
         value={form.warranty || ""}
         min={0}
       />
 
-      {errors.warranty && <p className="sellForm-error_p">{errors.warranty}</p>}
+      {errors.warranty && (
+        <p className="form_input-error--p">{errors.warranty}</p>
+      )}
 
       {/** ---- ADDRESS ----  **/}
-      <label htmlFor="address" className="sellForm-label">
+      <label htmlFor="address" className="form_label">
         Address
       </label>
       <select
         name="address"
         id="address"
-        className={`sellForm-input ${errors.address && "sellForm-input_error"}`}
+        className={`form_input  ${errors.address && "form_input-error"}`}
         onChange={handleChange}
         value={form.address || ""}
       >
@@ -190,28 +191,30 @@ const SellForm = ({
           ))}
       </select>
 
-      {errors.address && <p className="sellForm-error_p">{errors.address}</p>}
+      {errors.address && (
+        <p className="form_input-error--p">{errors.address}</p>
+      )}
 
       {/** ---- DESCRIPTION ----  **/}
-      <label htmlFor="description" className="sellForm-label">
+      <label htmlFor="description" className="form_label">
         Description:
       </label>
       <textarea
         name="description"
         id="description"
         className={`sellForm-textarea ${
-          errors.description && "sellForm-input_error"
+          errors.description && "form_input-error"
         }`}
         onChange={handleChange}
         value={form.description || ""}
       ></textarea>
 
       {errors.description && (
-        <p className="sellForm-error_p">{errors.description}</p>
+        <p className="form_input-error--p">{errors.description}</p>
       )}
 
       {/** ---- IMAGE FILE AND PREVIEW ----  **/}
-      <label htmlFor="image" className="sellForm-label">
+      <label htmlFor="image" className="form_label">
         Product image:
       </label>
       {image.preview && (
