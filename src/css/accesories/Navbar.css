@@ -9,12 +9,21 @@
 .nav-li_userIcon {
   display: flex;
   cursor: pointer;
+  margin-right: 4rem;
 }
 
 .navbar-userIcon {
   width: 1.5rem;
 }
-
+.dropdown-menu,
+.dropdown-item {
+  background-color: var(--blueDark) !important;
+  font-weight: bolder;
+  color: #fff;
+}
+.dropdown-item:hover {
+  background-color: var(--blueLight) !important;
+}
 .btnNavbar {
   font-family: var(--FM-Quicksand);
   border: none;
@@ -31,4 +40,13 @@
 .sharknet-logo {
   width: 4rem;
   margin-left: 2rem;
+}
+
+/*        MEDIA QUERIES        */
+
+@media (max-width: 991px) {
+  .nav-li_userIcon {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

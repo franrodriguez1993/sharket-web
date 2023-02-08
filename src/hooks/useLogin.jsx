@@ -30,7 +30,7 @@ const useLogin = (initialState) => {
       body: form,
     }).then((res) => {
       setLoginLoading(false);
-      if (!res.status === 400 || res.status === 404) {
+      if (res.status === 400 || res.status === 404) {
         return setError("Invalid credentials");
       } else if (res.status === 500) {
         return setError("Server error");

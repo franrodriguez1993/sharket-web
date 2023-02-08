@@ -17,6 +17,10 @@ import EditProductRoute from "./routes/products/EditProductRoute";
 import ViewSalesRoute from "./routes/products/ViewSalesRoute";
 import ViewBuysRoute from "./routes/products/ViewBuysRoute";
 import RegisterRoute from "./routes/general/RegisterRoute";
+import ProfileRoute from "./routes/profile/ProfileRoute";
+import PersonalDataRoute from "./routes/profile/PersonalDataRoute";
+import ChangeMailRoute from "./routes/profile/ChangeMailRoute";
+import PasswordRoute from "./routes/profile/PasswordRoute";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -66,10 +70,45 @@ root.render(
                 </VerifyAccess>
               }
             />
-            <Route path="/products/user/buys" element={<ViewBuysRoute />} />
+            <Route
+              path="/products/user/buys"
+              element={
+                <VerifyAccess>
+                  <ViewBuysRoute />
+                </VerifyAccess>
+              }
+            />
 
             {/** ---------- PRODUCTO INDIVIDUAL ----------**/}
             <Route path="/product/:id" element={<ProductRoute />} />
+
+            {/** ----------------- PROFILE ----------------- **/}
+            <Route
+              path="/profile"
+              element={
+                <VerifyAccess>
+                  <ProfileRoute />
+                </VerifyAccess>
+              }
+            />
+            <Route
+              path="/profile/data"
+              element={
+                <VerifyAccess>
+                  <PersonalDataRoute />
+                </VerifyAccess>
+              }
+            />
+
+            <Route
+              path="/profile/mail"
+              element={
+                <VerifyAccess>
+                  <ChangeMailRoute />
+                </VerifyAccess>
+              }
+            />
+            <Route path="/profile/password" element={<PasswordRoute />} />
           </Route>
         </Routes>
       </UserProvider>

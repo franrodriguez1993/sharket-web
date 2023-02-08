@@ -61,21 +61,9 @@ const Navbar = () => {
                   Products
                 </NavLink>
               </li>
+
               {/** ------------------ Dinamic content ------------------   **/}
-              {user ? (
-                <>
-                  <li>
-                    <NavLink
-                      className="nav-link active text-light"
-                      aria-current="page"
-                      to="/"
-                      onClick={logOut}
-                    >
-                      Logout
-                    </NavLink>
-                  </li>
-                </>
-              ) : (
+              {!user && (
                 <>
                   <li className="nav-item">
                     <NavLink
@@ -114,20 +102,52 @@ const Navbar = () => {
               </button>
             </form>
 
+            {/**  -----------  Dinamic content -----------  **/}
             <ul className="navbar-nav ms-5 me-5 mb-2 mb-lg-0">
               {user && (
-                <li className="nav-li_userIcon">
-                  <img src={userIcon} alt="" className="navbar-userIcon" />
-                  <NavLink
-                    className="nav-link active text-light fw-bolder"
-                    aria-current="page"
-                    to="/"
-                  >
-                    {user.user_username}
-                  </NavLink>
-                </li>
+                <>
+                  <li className="nav-item dropdown nav-li_userIcon">
+                    <img src={userIcon} alt="" className="navbar-userIcon" />
+                    <a
+                      className="nav-link dropdown-toggle text-light"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      {user.user_username}
+                    </a>
+                    <ul className="dropdown-menu">
+                      <li>
+                        <NavLink className="dropdown-item" to="profile">
+                          Profile
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink className="dropdown-item" to="favorite">
+                          Favorites
+                        </NavLink>
+                      </li>
+                      <li>
+                        <hr className="dropdown-divider bg-light" />
+                      </li>
+                      <li>
+                        <NavLink
+                          className="dropdown-item"
+                          aria-current="page"
+                          to="/"
+                          onClick={logOut}
+                        >
+                          Logout
+                        </NavLink>
+                      </li>
+                    </ul>
+                  </li>
+                </>
               )}
             </ul>
+
+            {/**  ----------- End dinamic content -----------  **/}
           </div>
         </div>
       </nav>
