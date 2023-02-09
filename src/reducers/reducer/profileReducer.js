@@ -9,6 +9,30 @@ export const initialStates = {
   personalForm: { username: "", name: "", lastname: "", dni: "", phone: "" },
   mailForm: { mail: "" },
   passwordForm: { password: "", repassword: "" },
+  imageForm: { preview: "", data: "" },
+  birthdayForm: {
+    day: 0,
+    month: 0,
+    year: 0,
+  },
+  addressesList: [],
+  addressForm: {
+    street: "",
+    number: "",
+    floor: "",
+    apartment: "",
+    city: "",
+    state: "",
+  },
+  creditcardList: [],
+  creditCardForm: {
+    cc_name: "",
+    cc_number: "",
+    cc_month: "",
+    cc_year: "",
+    cc_code: "",
+    cc_bank: "",
+  },
 };
 
 /**  FUNCTION REDUCER    **/
@@ -63,6 +87,56 @@ export const profileReducer = (state, action) => {
           [action.payload.name]: action.payload.value,
         },
       };
+
+    /**HANDLE CHANGE IMAGE **/
+    case TYPES_PROFILEROUTE.handleChangeImage:
+      return { ...state, imageForm: action.payload };
+
+    /**SET IMAGE  FORM**/
+    case TYPES_PROFILEROUTE.setImageForm:
+      return {
+        ...state,
+        imageForm: { ...state.imageForm, preview: action.payload },
+      };
+
+    /** HANDLE CHANGE BIRTHDAY**/
+    case TYPES_PROFILEROUTE.handleChangeBirthday:
+      return {
+        ...state,
+        birthdayForm: {
+          ...state.birthdayForm,
+          [action.payload.name]: action.payload.value,
+        },
+      };
+
+    /** HANDLE CHANGE ADDRESS**/
+    case TYPES_PROFILEROUTE.handleChangeAddress:
+      return {
+        ...state,
+        addressForm: {
+          ...state.addressForm,
+          [action.payload.name]: action.payload.value,
+        },
+      };
+
+    /** SET ADDRESSES LIST**/
+    case TYPES_PROFILEROUTE.setAddresses:
+      return { ...state, addressesList: action.payload };
+
+    /** SET CREDITCARDS LIST**/
+    case TYPES_PROFILEROUTE.setCreditCards:
+      return { ...state, creditcardList: action.payload };
+
+    /** HANDLE CHANGE CREDIT CARD**/
+    case TYPES_PROFILEROUTE.handleChangeCreditCard:
+      return {
+        ...state,
+        creditCardForm: {
+          ...state.creditCardForm,
+          [action.payload.name]: action.payload.value,
+        },
+      };
+
     default:
       return state;
   }

@@ -28,10 +28,30 @@ const ProfileRoute = () => {
           >
             Change Password
           </button>
-          <button className="button-blue">Update photo</button>
-          <button className="button-blue">Birthday</button>
-          <button className="button-blue">Address</button>
-          <button className="button-blue">Credit Card</button>
+          <button
+            className="button-blue"
+            onClick={() => navigate("/profile/image")}
+          >
+            Update photo
+          </button>
+          <button
+            className="button-blue"
+            onClick={() => navigate("/profile/birthday")}
+          >
+            Birthday
+          </button>
+          <button
+            className="button-blue"
+            onClick={() => navigate("/profile/address")}
+          >
+            Address
+          </button>
+          <button
+            className="button-blue"
+            onClick={() => navigate("/profile/creditcard")}
+          >
+            Credit Card
+          </button>
         </nav>
         <article className="profile-data">
           <h3 className="title">Personal data</h3>

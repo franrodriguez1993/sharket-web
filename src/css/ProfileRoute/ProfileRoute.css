@@ -20,10 +20,80 @@
   background-color: #fff;
 }
 
+.img-profile_change {
+  width: 13rem;
+  height: 13rem;
+  margin: 2rem;
+  border: 2px solid var(--blueDark);
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/**   -------- ADDRESS ROUTE --------   **/
+.address-noaddress,
+.cc-nocc {
+  width: 80%;
+  height: 6rem;
+  background-color: #fff;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addressCard,
+.ccCard {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  margin: 1rem 0;
+  background-color: var(--lightlightYellow);
+  border-top: 2px solid var(--darkDarkBlue);
+  border-bottom: 4px solid var(--darkDarkBlue);
+}
+.addresscard-street,
+.addresscard-city,
+.ccCard-name,
+.ccCard-date {
+  margin-top: 0.5rem;
+  text-align: left;
+}
+.addresscard-p,
+.ccCard-p {
+  font-weight: bolder;
+  color: var(--blue);
+}
+.addresscard-b,
+.ccCard-b {
+  font-weight: bolder;
+  color: var(--blueDark);
+}
+.container-option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /*       MEDIA QUERIES       */
 @media (max-width: 800px) {
   .profile-nav,
   .profile-data {
     width: 100%;
+  }
+  .profile-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .addressCard,
+  .ccCard {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 550px) {
+  .profile-nav {
+    flex-direction: column;
   }
 }

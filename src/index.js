@@ -21,6 +21,10 @@ import ProfileRoute from "./routes/profile/ProfileRoute";
 import PersonalDataRoute from "./routes/profile/PersonalDataRoute";
 import ChangeMailRoute from "./routes/profile/ChangeMailRoute";
 import PasswordRoute from "./routes/profile/PasswordRoute";
+import ChangeImageRoute from "./routes/profile/ChangeImageRoute";
+import BirthdayRoute from "./routes/profile/BirthdayRoute";
+import AddressRoute from "./routes/profile/AddressRoute";
+import CreditCardRoute from "./routes/profile/CreditCardRoute";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -108,7 +112,40 @@ root.render(
                 </VerifyAccess>
               }
             />
-            <Route path="/profile/password" element={<PasswordRoute />} />
+            <Route
+              path="/profile/password"
+              element={
+                <VerifyAccess>
+                  <PasswordRoute />
+                </VerifyAccess>
+              }
+            />
+            <Route
+              path="/profile/image"
+              element={
+                <VerifyAccess>
+                  <ChangeImageRoute />
+                </VerifyAccess>
+              }
+            />
+            <Route
+              path="/profile/birthday"
+              element={
+                <VerifyAccess>
+                  <BirthdayRoute />
+                </VerifyAccess>
+              }
+            />
+            <Route
+              path="/profile/address"
+              element={
+                <VerifyAccess>
+                  <AddressRoute />
+                </VerifyAccess>
+              }
+            />
+
+            <Route path="/profile/creditcard" element={<CreditCardRoute />} />
           </Route>
         </Routes>
       </UserProvider>

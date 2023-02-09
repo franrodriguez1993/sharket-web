@@ -26,9 +26,15 @@ const useProfile = (user, token, logIn) => {
     personalForm,
     mailForm,
     passwordForm,
+    imageForm,
+    birthdayForm,
+    addressesList,
+    addressForm,
+    creditCardForm,
+    creditcardList,
   } = states;
 
-  /** -----------------  USE EFFECT  -----------------  **/
+  /** ============================  USE EFFECT  ============================  **/
   useEffect(() => {
     //Personal form:
     dispatch({
@@ -41,9 +47,29 @@ const useProfile = (user, token, logIn) => {
         phone: user.user_phone,
       },
     });
+
+    //Image:
+    if (user.user_image !== "") {
+      dispatch({
+        type: TYPES_PROFILEROUTE.setImageForm,
+        payload: user.user_image,
+      });
+    }
+
+    //Addresses:
+    dispatch({
+      type: TYPES_PROFILEROUTE.setAddresses,
+      payload: user.user_addresses,
+    });
+
+    //Credit cards:
+    dispatch({
+      type: TYPES_PROFILEROUTE.setCreditCards,
+      payload: user.user_creditCards,
+    });
   }, []);
 
-  /** -----------------CHANGE HANDLERS  -----------------  **/
+  /** ============================  CHANGE HANDLERS  ============================  **/
   //Personal data:
   const HCPersonalForm = (e) => {
     dispatch({
@@ -62,8 +88,40 @@ const useProfile = (user, token, logIn) => {
       payload: e.target,
     });
   };
+  //Image:
+  const HCImage = (e) => {
+    const img = {
+      preview: URL.createObjectURL(e.target.files[0]),
+      data: e.target.files[0],
+    };
+    dispatch({ type: TYPES_PROFILEROUTE.handleChangeImage, payload: img });
+  };
 
-  /** -----------------SUBMIT HANDLERS  -----------------  **/
+  // Birthday:
+  const HCBirthday = (e) => {
+    dispatch({
+      type: TYPES_PROFILEROUTE.handleChangeBirthday,
+      payload: e.target,
+    });
+  };
+
+  // Address:
+  const HCAddress = (e) => {
+    dispatch({
+      type: TYPES_PROFILEROUTE.handleChangeAddress,
+      payload: e.target,
+    });
+  };
+
+  //Credit card:
+  const HCCreditCard = (e) => {
+    dispatch({
+      type: TYPES_PROFILEROUTE.handleChangeCreditCard,
+      payload: e.target,
+    });
+  };
+
+  /** ============================  SUBMIT HANDLERS  ============================  **/
 
   /* PERSONAL DATA:  */
   const HSPersonalForm = (e) => {
@@ -122,6 +180,7 @@ const useProfile = (user, token, logIn) => {
     });
   };
 
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   /* MAIL:  */
   const HSMail = (e) => {
     e.preventDefault();
@@ -164,6 +223,7 @@ const useProfile = (user, token, logIn) => {
     });
   };
 
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   /* PASSWORD::  */
 
   const HSPassword = (e) => {
@@ -200,6 +260,200 @@ const useProfile = (user, token, logIn) => {
     });
   };
 
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  /* IMAGE: */
+
+  const HSImage = (e) => {
+    e.preventDefault();
+    if (imageForm.data === "") return;
+    let imgData = new FormData();
+    imgData.append("image", imageForm.data);
+    const url = `${URL_API}/user/image/${user.user_id}`;
+
+    dispatch({ type: TYPES_PROFILEROUTE.setloading });
+    FetchFunction({ url, method: "PUT", files: true, body: imgData }).then(
+      (res) => {
+        if (res.status === 201) {
+          logIn(user.user_id, token);
+          navigate("/profile");
+        } else {
+          dispatch({
+            type: TYPES_PROFILEROUTE.setErrorFetch,
+            payload: "Server error",
+          });
+        }
+      }
+    );
+  };
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+  /* BIRTHDAY: */
+  const HSBirthday = (e) => {
+    e.preventDefault();
+
+    //Reset Errors:
+    dispatch({ type: TYPES_PROFILEROUTE.resetErrorsForm });
+
+    //Check errors:
+    const checkErrors = validateForm(birthdayForm, ["day", "month", "year"]);
+    if (Object.keys(checkErrors).length !== 0) {
+      return dispatch({
+        type: TYPES_PROFILEROUTE.setErrorsForm,
+        payload: checkErrors,
+      });
+    }
+
+    //Update birthday:
+    dispatch({ type: TYPES_PROFILEROUTE.setloading });
+    const url = `${URL_API}/user/update/birthday/${user.user_id}`;
+    FetchFunction({ url, method: "PUT", body: birthdayForm }).then((res) => {
+      if (res.status === 201) {
+        logIn(user.user_id, token);
+        navigate("/profile");
+      } else {
+        dispatch({
+          type: TYPES_PROFILEROUTE.setErrorFetch,
+          payload: "Server error",
+        });
+      }
+    });
+  };
+
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+  /* ADDRESS  */
+  const HSDeleteAddress = (e, id) => {
+    e.preventDefault();
+    dispatch({ type: TYPES_PROFILEROUTE.setloading });
+    const url = `${URL_API}/user/address/del/${id}`;
+
+    FetchFunction({ url, method: "DELETE" }).then((res) => {
+      if (res.status === 200) {
+        logIn(user.user_id, token);
+        navigate("/profile");
+      } else {
+        dispatch({
+          type: TYPES_PROFILEROUTE.setErrorFetch,
+          payload: "Server Error",
+        });
+      }
+    });
+  };
+
+  const HSAdress = (e) => {
+    e.preventDefault();
+
+    //Reset Errors:
+    dispatch({ type: TYPES_PROFILEROUTE.resetErrorsForm });
+
+    //Check errors:
+    const checkErrors = validateForm(addressForm, [
+      "street",
+      "number",
+      "floor",
+      "apartment",
+      "city",
+      "state",
+    ]);
+
+    if (Object.keys(checkErrors).length !== 0) {
+      return dispatch({
+        type: TYPES_PROFILEROUTE.setErrorsForm,
+        payload: checkErrors,
+      });
+    }
+
+    //create address:
+    dispatch({ type: TYPES_PROFILEROUTE.setloading });
+    const url = `${URL_API}/user/address/add/${user.user_id}`;
+    const body = {
+      street: addressForm.street,
+      number: addressForm.number.toString(),
+      floor: addressForm.floor.toString(),
+      apartment: addressForm.apartment,
+      city: addressForm.city,
+      state: addressForm.state,
+    };
+    FetchFunction({ url, method: "POST", body }).then((res) => {
+      if (res.status === 201) {
+        logIn(user.user_id, token);
+        navigate("/profile");
+      } else {
+        dispatch({
+          type: TYPES_PROFILEROUTE.setErrorFetch,
+          payload: "Server error",
+        });
+      }
+    });
+  };
+
+  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+  /* CREDIT CARDS  */
+
+  const HSDeleteCreditCard = (e, id) => {
+    e.preventDefault();
+    dispatch({ type: TYPES_PROFILEROUTE.setloading });
+    const url = `${URL_API}/user/creditcard/del/${id}`;
+    FetchFunction({ url, method: "DELETE" }).then((res) => {
+      if (res.status === 200) {
+        logIn(user.user_id, token);
+        navigate("/profile");
+      } else {
+        dispatch({
+          type: TYPES_PROFILEROUTE.setErrorFetch,
+          payload: "Server error",
+        });
+      }
+    });
+  };
+
+  const HSCreditCard = (e) => {
+    e.preventDefault();
+
+    //Reset errors:
+    dispatch({ type: TYPES_PROFILEROUTE.resetErrorsForm });
+
+    //Check errors:
+    const checkErrors = validateForm(creditCardForm, [
+      "cc_name",
+      "cc_number",
+      "cc_code",
+      "cc_month",
+      "cc_year",
+      "cc_bank",
+    ]);
+    if (Object.keys(checkErrors).length !== 0) {
+      return dispatch({
+        type: TYPES_PROFILEROUTE.setErrorsForm,
+        payload: checkErrors,
+      });
+    }
+
+    //Add credit card:
+
+    dispatch({ type: TYPES_PROFILEROUTE.setloading });
+    const body = {
+      name: creditCardForm.cc_name,
+      number: creditCardForm.cc_number.toString(),
+      bank: creditCardForm.cc_bank.toString(),
+      date: `${creditCardForm.cc_month}/${creditCardForm.cc_year
+        .toString()
+        .slice(2, 4)}`,
+      code: creditCardForm.cc_code.toString(),
+    };
+    const url = `${URL_API}/user/creditcard/add/${user.user_id}`;
+    FetchFunction({ url, method: "POST", body }).then((res) => {
+      if (res.status === 201) {
+        logIn(user.user_id, token);
+        navigate("/profile");
+      } else {
+        console.log(res);
+        dispatch({
+          type: TYPES_PROFILEROUTE.setErrorFetch,
+          payload: "Server error",
+        });
+      }
+    });
+  };
+
   /** RETURNS **/
   return {
     loading,
@@ -214,6 +468,22 @@ const useProfile = (user, token, logIn) => {
     passwordForm,
     HCPassword,
     HSPassword,
+    HCImage,
+    HSImage,
+    imageForm,
+    birthdayForm,
+    HCBirthday,
+    HSBirthday,
+    addressesList,
+    addressForm,
+    HSDeleteAddress,
+    HCAddress,
+    HSAdress,
+    creditCardForm,
+    creditcardList,
+    HCCreditCard,
+    HSDeleteCreditCard,
+    HSCreditCard,
   };
 };
 
