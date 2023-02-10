@@ -227,8 +227,8 @@
 
 /**    CONTAINER SUCCESS       **/
 .alert-success-container {
-  padding: 0.4rem 1rem;
   margin: 1rem 0;
+  height: 2.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -237,6 +237,7 @@
 }
 
 .text-alert-success {
+  margin: auto;
   font-weight: bolder;
   color: var(--lightGreen);
 }

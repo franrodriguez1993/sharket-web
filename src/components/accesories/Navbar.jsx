@@ -118,11 +118,33 @@ const Navbar = () => {
                       {user.user_username}
                     </a>
                     <ul className="dropdown-menu">
-                      <li>
-                        <NavLink className="dropdown-item" to="profile">
-                          Profile
-                        </NavLink>
-                      </li>
+                      {/** Profile for USER & STORE **/}
+                      {(user.Rol.rol_name === "user" ||
+                        user.Rol.rol_name === "store") && (
+                        <li>
+                          <NavLink className="dropdown-item" to="profile">
+                            Profile
+                          </NavLink>
+                        </li>
+                      )}
+                      {/** Panel for STAFF **/}
+                      {user.Rol.rol_name === "staff" && (
+                        <li>
+                          <NavLink className="dropdown-item" to="panel/staff">
+                            Panel
+                          </NavLink>
+                        </li>
+                      )}
+
+                      {/** Panel for ADMIN **/}
+                      {user.Rol.rol_name === "admin" && (
+                        <li>
+                          <NavLink className="dropdown-item" to="panel/admin">
+                            Panel
+                          </NavLink>
+                        </li>
+                      )}
+
                       <li>
                         <NavLink className="dropdown-item" to="favorite">
                           Favorites

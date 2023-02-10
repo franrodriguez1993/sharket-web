@@ -25,6 +25,8 @@ import ChangeImageRoute from "./routes/profile/ChangeImageRoute";
 import BirthdayRoute from "./routes/profile/BirthdayRoute";
 import AddressRoute from "./routes/profile/AddressRoute";
 import CreditCardRoute from "./routes/profile/CreditCardRoute";
+import PanelStaffRoute from "./routes/superuser/PanelStaffRoute";
+import PanelAdminRoute from "./routes/superuser/PanelAdminRoute";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -145,7 +147,25 @@ root.render(
               }
             />
 
-            <Route path="/profile/creditcard" element={<CreditCardRoute />} />
+            <Route
+              path="/profile/creditcard"
+              element={
+                <VerifyAccess>
+                  <CreditCardRoute />
+                </VerifyAccess>
+              }
+            />
+
+            {/** SUPERUSER **/}
+            <Route
+              path="/panel/staff"
+              element={
+                <VerifyAccess>
+                  <PanelStaffRoute />
+                </VerifyAccess>
+              }
+            />
+            <Route path="/panel/admin/*" element={<PanelAdminRoute />} />
           </Route>
         </Routes>
       </UserProvider>
