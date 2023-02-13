@@ -51,7 +51,14 @@ const UserProvider = (props) => {
 
   return (
     <UserContext.Provider
-      value={{ user, token, loadingPage, setToken, logIn, logOut }}
+      value={{
+        user,
+        token,
+        loadingPage,
+        setToken,
+        logIn,
+        logOut,
+      }}
     >
       {props.children}
     </UserContext.Provider>

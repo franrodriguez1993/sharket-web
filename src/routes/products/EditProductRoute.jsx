@@ -7,7 +7,7 @@ import { UserContext } from "../../context/UserProvider";
 import TYPES_SELLPRODUCTS from "../../reducers/types/sellProductsTypes";
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //Hook:
-import useProduct from "../../hooks/useProduct";
+import useSell from "../../hooks/useSell";
 import { useParams } from "react-router-dom";
 //Components:
 import SectionLoader from "../../components/accesories/SectionLoader";
@@ -34,7 +34,7 @@ const EditProductRoute = () => {
     descriptionImage,
     handleUploadDescImg,
     handleDelDescrImg,
-  } = useProduct(user, id);
+  } = useSell(user, id);
 
   return (
     <div className="routeContainer">

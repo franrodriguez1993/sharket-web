@@ -1,0 +1,29 @@
+.commentcard {
+  width: 100%;
+  margin: 0.5rem 0;
+  cursor: pointer;
+  background-color: var(--lightGreen);
+}
+
+.commentcard-username {
+  color: var(--blueSoft);
+}
+.commentcard-body_parent {
+  font-weight: bolder;
+  color: #fff;
+}
+.commentcard-son {
+  border-top: 0.5px solid #fff;
+  padding: 0.5rem 0;
+}
+
+.commentcard-you {
+  font-weight: bolder;
+}
+.commentcard-body_son {
+  color: var(--blueLight);
+  font-weight: bolder;
+}
+.commentcard-date {
+  font-size: 0.8rem;
+}

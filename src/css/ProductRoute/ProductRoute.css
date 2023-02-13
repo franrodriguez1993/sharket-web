@@ -170,7 +170,7 @@
 /**  --------------------COMMENTS SECTION -----------------------  **/
 
 .commentData-container {
-  margin: 3rem;
+  margin-top: 3rem;
   background-color: #fff;
   width: 80%;
   border-radius: 10px;
@@ -213,6 +213,15 @@
   width: 2rem;
   margin: 1rem;
   cursor: default;
+}
+
+.form-comment_textarea {
+  width: 80%;
+  resize: none;
+  background-color: var(--lightGreen);
+  border: none;
+  border-radius: 10px;
+  font-weight: bolder;
 }
 
 /**  SIMILAR AND SELLER PRODUCTS SECTION   **/

@@ -6,7 +6,6 @@ export const initialState = {
   loadingProduct: false,
   loadingComments: false,
   loadingSimilarProducts: false,
-  loadingReputationSeller: false,
   loadingFavOperation: false,
   error: "",
   comments: [],
@@ -15,8 +14,15 @@ export const initialState = {
   commentPage: 0,
   similarProducts: [],
   sellerProducts: [],
-  reputationSeller: [],
   favorites: [],
+  formComment: {
+    product: "",
+    user: "",
+    body: "",
+    reply: null,
+    parent: true,
+  },
+  formError: "",
 };
 
 /**  ---------- REDUCER ----------  **/
@@ -76,18 +82,7 @@ export const productRouteReducer = (state, action) => {
     case TYPES_PRODUCTROUTE.loadingSimilarProducts:
       return { ...state, loadingSimilarProducts: true };
 
-    /** REPUTATION SELLER DATA **/
-    case TYPES_PRODUCTROUTE.reputationsSellerData:
-      return {
-        ...state,
-        reputationSeller: action.payload,
-        loadingReputationSeller: false,
-      };
-
-    /** LOADING REPUTATION SELLER **/
-    case TYPES_PRODUCTROUTE.loadingReputationSeller:
-      return { ...state, loadingReputationSeller: true };
-    /** LOADING REPUTATION SELLER **/
+    /**  SELLER PRODUCTS DATA **/
     case TYPES_PRODUCTROUTE.sellerProductsData:
       return { ...state, sellerProducts: action.payload };
 
@@ -119,6 +114,30 @@ export const productRouteReducer = (state, action) => {
           (i) => i.product_id != action.payload
         ),
       };
+
+    /** HANDLE CHANGE COMMENT**/
+    case TYPES_PRODUCTROUTE.handleChangeComment:
+      return {
+        ...state,
+        formComment: {
+          ...state.formComment,
+          [action.payload.name]: action.payload.value,
+        },
+      };
+
+    /** ADD NEW COMMENT **/
+    case TYPES_PRODUCTROUTE.addNewComment:
+      return {
+        ...state,
+        comments: [action.payload, ...state.comments],
+        loadingProduct: false,
+        formError: "",
+        formComment: initialState.formComment,
+      };
+
+    /** ERROR FORM COMMENT **/
+    case TYPES_PRODUCTROUTE.errorFormComment:
+      return { ...state, formError: action.payload, loadingProduct: false };
     default:
       return state;
   }

@@ -27,6 +27,9 @@ import AddressRoute from "./routes/profile/AddressRoute";
 import CreditCardRoute from "./routes/profile/CreditCardRoute";
 import PanelStaffRoute from "./routes/superuser/PanelStaffRoute";
 import PanelAdminRoute from "./routes/superuser/PanelAdminRoute";
+import FavoritesRoute from "./routes/profile/FavoritesRoute";
+import NotificationRoute from "./routes/profile/NotificationRoute";
+import ProductCommentRoute from "./routes/products/ProductCommentRoute";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -87,6 +90,10 @@ root.render(
 
             {/** ---------- PRODUCTO INDIVIDUAL ----------**/}
             <Route path="/product/:id" element={<ProductRoute />} />
+            <Route
+              path="/product/comments/:id"
+              element={<ProductCommentRoute />}
+            />
 
             {/** ----------------- PROFILE ----------------- **/}
             <Route
@@ -156,7 +163,21 @@ root.render(
               }
             />
 
-            {/** SUPERUSER **/}
+            <Route
+              path="/profile/favorite"
+              element={
+                <VerifyAccess>
+                  <FavoritesRoute />
+                </VerifyAccess>
+              }
+            />
+
+            <Route
+              path="/profile/notification"
+              element={<NotificationRoute />}
+            />
+
+            {/** ----------------------- SUPERUSER -------------------- **/}
             <Route
               path="/panel/staff"
               element={
@@ -165,7 +186,14 @@ root.render(
                 </VerifyAccess>
               }
             />
-            <Route path="/panel/admin/*" element={<PanelAdminRoute />} />
+            <Route
+              path="/panel/admin/*"
+              element={
+                <VerifyAccess>
+                  <PanelAdminRoute />
+                </VerifyAccess>
+              }
+            />
           </Route>
         </Routes>
       </UserProvider>

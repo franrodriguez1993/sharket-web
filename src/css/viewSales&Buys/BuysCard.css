@@ -1,4 +1,4 @@
-.salesCard {
+.buysCard {
   width: 100%;
   min-height: 5rem;
   display: flex;
@@ -7,51 +7,39 @@
   align-items: center;
   margin: 1rem 0;
   padding: 0.5rem;
-  background-color: #fff;
+  background-color: var(--blueSoft);
+  border-top: 1px solid var(--blueLight);
   border-bottom: 4px solid var(--blueLight);
 }
-.salesCard-buyer,
-.salesCard-product,
-.salesCard-amount,
-.salesCard-rate {
+.buysCard-buyer,
+.buysCard-product,
+.buysCard-amount,
+.buysCard-rate {
   width: 10rem;
   height: 100%;
   text-align: start;
 }
-.salesCard-img_container {
-  height: 100%;
-  width: 5rem;
-  text-align: start;
-}
 
-.salesCard-img {
-  width: 4rem;
-  object-fit: cover;
-}
-
-.salesCard-rate {
+.buysCard-rate {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.salesCard-p {
-  color: black;
+.buysCard-p {
+  color: var(--lightYellow);
   font-weight: bolder;
 }
 
-.salesCard-b {
-  color: var(--blueV4);
+.buysCard-b {
+  color: var(--blueDark);
 }
 
 /*    -------------   MEDIA QUERIES  ----------------     */
 
 @media (max-width: 750px) {
-  .salesCard {
+  .buysCard {
     flex-direction: column;
     align-items: center;
-  }
-  .salesCard-img {
-    margin-bottom: 1rem;
   }
 } ;

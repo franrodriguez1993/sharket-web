@@ -1,16 +1,10 @@
-import React, { useEffect, useReducer, useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "../../css/ProductRoute/ProductRoute.css";
-//Fetch:
-import { URL_API } from "../../utils/URL";
-import ManageFetch from "../../utils/manageFetch";
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//Reducer:
-import {
-  productRouteReducer,
-  initialState,
-} from "../../reducers/reducer/productRouteReducer";
-import TYPES_PRODUCTROUTE from "../../reducers/types/productRouteTypes";
+
+//Hook:
+import useProductRoute from "../../hooks/useProductRoute";
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //Components:
 import ProductData from "../../components/productRoute/ProductData";
@@ -21,147 +15,37 @@ import SimilarProducts from "../../components/productRoute/SimilarProducts";
 import SellerProducts from "../../components/productRoute/SellerProducts";
 import FavoriteSection from "../../components/productRoute/FavoriteSection";
 import { UserContext } from "../../context/UserProvider";
+import CommentForm from "../../components/productRoute/CommentForm";
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 const ProductRoute = () => {
   const { user } = useContext(UserContext);
   const { id } = useParams();
-  const { FetchFunction } = ManageFetch();
-  const [productStates, dispatch] = useReducer(
-    productRouteReducer,
-    initialState
-  );
+
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, [id]);
+
   const {
     product,
     loadingProduct,
     error,
+    dispatch,
     comments,
     loadingComments,
     commentPage,
     commentTotalPage,
     commentCurrentPage,
     similarProducts,
-    loadingReputationSeller,
-    reputationSeller,
     sellerProducts,
     favorites,
     loadingFavOperation,
-  } = productStates;
-
-  /** USE EFFECT PRODUCT  **/
-  useEffect(() => {
-    window.scroll(0, 0);
-    const url = `${URL_API}/product/list/${id}`;
-    dispatch({ type: TYPES_PRODUCTROUTE.loadingProduct });
-    FetchFunction({ url, method: "GET" }).then((res) => {
-      if (!res) return;
-      if (res.status === 200) {
-        dispatch({ type: TYPES_PRODUCTROUTE.productData, payload: res.data });
-
-        //get Similar products:
-        getSimilarProducts(res.data.product_type.pt_id);
-        //get Seller Reputation:
-        getReputationSeller(res.data.user.user_id);
-        //get seller products:
-        getSellerProducts(res.data.user.user_id);
-
-        //setting favorites:
-        if (user) {
-          dispatch({
-            type: TYPES_PRODUCTROUTE.setFavorites,
-            payload: user.product_favorites,
-          });
-        }
-      } else if (res.status === 404) {
-        dispatch({
-          type: TYPES_PRODUCTROUTE.error,
-          payload: "Product not found",
-        });
-      }
-    });
-  }, [id]);
-
-  /** USE EFFECT COMMENTS   **/
-  useEffect(() => {
-    if (Object.keys(product).length === 0) return;
-    getComments(product.product_id, commentPage);
-  }, [product, commentPage]);
-
-  /** GET COMMENTS**/
-  function getComments(id, page) {
-    const url = `${URL_API}/comment/list/${id}?page=${page}&size=5`;
-    dispatch({ type: TYPES_PRODUCTROUTE.loadingComments });
-    FetchFunction({ url }).then((res) => {
-      if (res.status === 200) {
-        dispatch({
-          type: TYPES_PRODUCTROUTE.commentsData,
-          payload: res.data,
-        });
-      }
-    });
-  }
-  /** GET SIMILAR PRODUCTS**/
-  function getSimilarProducts(type) {
-    const url = `${URL_API}/product/list/type/${type}?size=4`;
-    FetchFunction({ url }).then((res) => {
-      if (res.status === 200) {
-        dispatch({
-          type: TYPES_PRODUCTROUTE.similarProductsData,
-          payload: res.data.products,
-        });
-      }
-    });
-  }
-  /** GET REPUTATION SELLER**/
-  function getReputationSeller(id) {
-    dispatch({ type: TYPES_PRODUCTROUTE.loadingReputationSeller });
-    const url = `${URL_API}/reputation/user/seller/${id}`;
-    FetchFunction({ url }).then((res) => {
-      if (!res) return;
-      if (res.status === 200) {
-        dispatch({
-          type: TYPES_PRODUCTROUTE.reputationsSellerData,
-          payload: res.data,
-        });
-      }
-    });
-  }
-  /** GET SELLER PRODUCTS**/
-  function getSellerProducts(id) {
-    const url = `${URL_API}/product/list/seller/${id}?size=4`;
-    FetchFunction({ url }).then((res) => {
-      if (!res) return;
-      if (res.status === 200) {
-        dispatch({
-          type: TYPES_PRODUCTROUTE.sellerProductsData,
-          payload: res.data.products,
-        });
-      }
-    });
-  }
-
-  /**  ------  HANDLE FAVORITE  ------  **/
-  const makeFavProduct = (e) => {
-    e.preventDefault();
-    const url = `${URL_API}/product/favorite`;
-    const body = { user: user.user_id, product: product.product_id };
-    dispatch({ type: TYPES_PRODUCTROUTE.loadingFavOperation });
-    FetchFunction({ url, body, method: "POST" }).then((res) => {
-      if (!res) return;
-      else if (res.status === 201) {
-        dispatch({
-          type: TYPES_PRODUCTROUTE.addNewFavorite,
-          payload: product.product_id,
-        });
-      } else if (res.status === 200) {
-        dispatch({
-          type: TYPES_PRODUCTROUTE.removeOneFavorite,
-          payload: product.product_id,
-        });
-      }
-    });
-  };
-
+    formComment,
+    formError,
+    makeFavProduct,
+    HCFormComment,
+    HSFormComment,
+  } = useProductRoute(id, user);
   return (
     <div className="ProductRoute-container">
       {!loadingProduct ? (
@@ -174,8 +58,6 @@ const ProductRoute = () => {
                 <SellerData
                   seller={product.user}
                   address={product.user_address}
-                  reputations={reputationSeller.reputation}
-                  loadingReputationSeller={loadingReputationSeller}
                 />
               </section>
 
@@ -193,15 +75,50 @@ const ProductRoute = () => {
                 </>
               )}
               {/**  COMMENTS SECTION **/}
-              {comments.length !== 0 && (
-                <CommentSection
-                  comments={comments}
-                  loadingComments={loadingComments}
-                  commentPage={commentPage}
-                  commentTotalPage={commentTotalPage}
-                  commentCurrentPage={commentCurrentPage}
-                  dispatch={dispatch}
-                />
+              {comments.length !== 0 ? (
+                <>
+                  <CommentSection
+                    comments={comments}
+                    loadingComments={loadingComments}
+                    commentPage={commentPage}
+                    commentTotalPage={commentTotalPage}
+                    commentCurrentPage={commentCurrentPage}
+                    dispatch={dispatch}
+                  />
+                  {user && (
+                    <>
+                      {user.Rol.rol_name === "user" &&
+                        product.user.user_id !== user.user_id && (
+                          <CommentForm
+                            HCFormComment={HCFormComment}
+                            HSFormComment={HSFormComment}
+                            formComment={formComment}
+                            formError={formError}
+                          />
+                        )}
+                    </>
+                  )}
+                </>
+              ) : (
+                <>
+                  <div className="commentData-container">
+                    <h3 className="commentData-title">Questions to seller</h3>
+                    <p>There're no questions yet.</p>
+                  </div>
+                  {user && (
+                    <>
+                      {user.Rol.rol_name === "user" &&
+                        product.user.user_id !== user.user_id && (
+                          <CommentForm
+                            HCFormComment={HCFormComment}
+                            HSFormComment={HSFormComment}
+                            formComment={formComment}
+                            formError={formError}
+                          />
+                        )}
+                    </>
+                  )}
+                </>
               )}
 
               {/**  SIMILAR PRODUCTS SECTION **/}

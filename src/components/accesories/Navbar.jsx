@@ -1,13 +1,26 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserProvider";
 import "../../css/accesories/Navbar.css";
+//Hook:
+import useNotification from "../../hooks/useNotification";
+//Components:
 import ModalLoaderPage from "./ModalLoaderPage";
+//Icons:
 import userIcon from "../../svg/user_icon.svg";
+import superuserIcon from "../../svg/superuser_icon.svg";
+import bellNoNoti from "../../svg/bell_nonoti.svg";
+import bellNoti from "../../svg/bell_noti.svg";
 const Navbar = () => {
   const navigate = useNavigate();
   const { user, logOut, loadingPage } = useContext(UserContext);
   const [form, setForm] = useState("");
+  const { checkUnseen, unseen } = useNotification();
+
+  useEffect(() => {
+    if (!user) return;
+    checkUnseen(user.user_id);
+  }, [user]);
 
   /** --------- HANDLE SEARCH --------   **/
   const handleSearch = (e) => {
@@ -107,7 +120,16 @@ const Navbar = () => {
               {user && (
                 <>
                   <li className="nav-item dropdown nav-li_userIcon">
-                    <img src={userIcon} alt="" className="navbar-userIcon" />
+                    <img
+                      src={
+                        user.Rol.rol_name === "admin" ||
+                        user.Rol.rol_name === "staff"
+                          ? superuserIcon
+                          : userIcon
+                      }
+                      alt=""
+                      className="navbar-userIcon"
+                    />
                     <a
                       className="nav-link dropdown-toggle text-light"
                       href="#"
@@ -145,11 +167,16 @@ const Navbar = () => {
                         </li>
                       )}
 
-                      <li>
-                        <NavLink className="dropdown-item" to="favorite">
-                          Favorites
-                        </NavLink>
-                      </li>
+                      {user.Rol.rol_name === "user" && (
+                        <li>
+                          <NavLink
+                            className="dropdown-item"
+                            to="profile/favorite"
+                          >
+                            Favorites
+                          </NavLink>
+                        </li>
+                      )}
                       <li>
                         <hr className="dropdown-divider bg-light" />
                       </li>
@@ -167,6 +194,27 @@ const Navbar = () => {
                   </li>
                 </>
               )}
+              <li className="nav-item dropdown nav-li_userIcon">
+                {user && (
+                  <>
+                    {unseen.length !== 0 ? (
+                      <img
+                        src={bellNoti}
+                        alt=""
+                        className="navbar-userIcon"
+                        onClick={() => navigate("/profile/notification")}
+                      />
+                    ) : (
+                      <img
+                        src={bellNoNoti}
+                        alt=""
+                        className="navbar-userIcon"
+                        onClick={() => navigate("/profile/notification")}
+                      />
+                    )}
+                  </>
+                )}
+              </li>
             </ul>
 
             {/**  ----------- End dinamic content -----------  **/}

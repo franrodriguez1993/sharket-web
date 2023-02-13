@@ -95,6 +95,16 @@
   margin: 1rem;
 }
 
+.section-cards-flex-wrap {
+  width: 90%;
+  background-color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 2rem 0;
+  border-radius: 10px;
+}
+
 .background-white {
   background-color: #fff;
 }
@@ -121,6 +131,18 @@
   width: 35rem;
   height: 2rem;
   margin: 0.5rem;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--lightGreen);
+  color: var(--blueDark);
+  font-weight: bolder;
+}
+
+.form_textarea {
+  width: 35rem;
+  height: 6rem;
+  margin: 0.5rem;
+  resize: none;
   border: none;
   border-radius: 10px;
   background-color: var(--lightGreen);

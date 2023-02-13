@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useReducer } from "react";
+
 import { UserContext } from "../../context/UserProvider";
 //Hooks:
 import { URL_API } from "../../utils/URL";
@@ -14,24 +15,12 @@ import {
 //Components:
 import SalesCard from "../../components/ViewSales&Buys/SalesCard";
 import SectionLoader from "../../components/accesories/SectionLoader";
-import ModalRate from "../../components/ViewSales&Buys/ModalRate";
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const ViewSalesRoute = () => {
   const { user } = useContext(UserContext);
   const { FetchFunction } = ManageFetch();
   const [states, dispatch] = useReducer(userSalesReducer, initialStates);
-  const {
-    sales,
-    loading,
-    errors,
-    errorModal,
-    currentPage,
-    totalPages,
-    scores,
-    page,
-    modal,
-    form,
-  } = states;
+  const { sales, loading, errors, currentPage, totalPages, page } = states;
 
   /**   --------- USE EFFECT ---------   **/
   useEffect(() => {
@@ -44,36 +33,6 @@ const ViewSalesRoute = () => {
       }
     });
   }, [user, page]);
-
-  /**  HANDLE RATE BUYER  **/
-
-  const handleRate = (e) => {
-    e.preventDefault();
-
-    //Check for erros:
-    if (form.rs_id === "" || form.description.trim() === "") {
-      return dispatch({
-        type: TYPES_USERSALES.setErrorModal,
-        payload: "You need to complete all the fields",
-      });
-    }
-
-    //Rating:
-    dispatch({ type: TYPES_USERSALES.setLoading });
-    dispatch({ type: TYPES_USERSALES.setCloseModal });
-    const url = `${URL_API}/reputation/user/qualify/buyer`;
-    FetchFunction({ url, method: "POST", body: form }).then((res) => {
-      if (res.status === 201) {
-        //Update the sales:
-        dispatch({
-          type: TYPES_USERSALES.updateRatedSales,
-          payload: form.sale,
-        });
-      } else {
-        dispatch({ type: TYPES_USERSALES.setError, payload: "Server error" });
-      }
-    });
-  };
 
   return (
     <div className="routeContainer">
@@ -89,12 +48,7 @@ const ViewSalesRoute = () => {
             {sales.length !== 0 ? (
               <>
                 {sales.map((s) => (
-                  <SalesCard
-                    key={s.sale_id}
-                    sale={s}
-                    dispatch={dispatch}
-                    user={user}
-                  />
+                  <SalesCard key={s.sale_id} sale={s} />
                 ))}
               </>
             ) : (
@@ -132,15 +86,6 @@ const ViewSalesRoute = () => {
           <button className="button-disable">Next</button>
         )}
       </section>
-      {modal && (
-        <ModalRate
-          dispatch={dispatch}
-          scores={scores}
-          form={form}
-          handleRate={handleRate}
-          errorModal={errorModal}
-        />
-      )}
     </div>
   );
 };

@@ -1,0 +1,54 @@
+.notificationCard {
+  width: 100%;
+  display: flex;
+  margin: 1rem 0;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid gray;
+  color: red;
+}
+.notificationCard:hover {
+  cursor: pointer;
+}
+
+.notification-product,
+.notification-type {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.notification-img {
+  width: 4rem;
+  object-fit: cover;
+}
+.notification-product_name {
+  font-weight: bolder;
+}
+
+.notification-seen {
+  color: black;
+}
+
+.scroll-div {
+  overflow-y: auto;
+  height: 30rem;
+}
+
+/*   --------  MEDIA QUERIES ----------    */
+@media (max-width: 800px) {
+  .notificationCard {
+    flex-direction: column;
+    align-items: center;
+  }
+  .notification-product,
+  .notification-type {
+    width: 100%;
+  }
+  .notification-product {
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+  .notification-img {
+    margin-right: 2rem;
+  }
+}

@@ -1,15 +1,8 @@
 import React from "react";
 //SVG:
 import verified from "../../svg/verified.svg";
-//Component:
-import ReputationSeller from "./ReputationSeller";
-import SectionLoader from "../accesories/SectionLoader";
-const SellerData = ({
-  seller,
-  address,
-  reputations,
-  loadingReputationSeller,
-}) => {
+
+const SellerData = ({ seller, address }) => {
   return (
     <article className="sellerData-container">
       <div>
@@ -33,16 +26,6 @@ const SellerData = ({
         {address.address_state} - {address.address_city}
       </p>
       <hr className="sellderData-hr" />
-
-      {loadingReputationSeller ? (
-        <>
-          <SectionLoader />
-        </>
-      ) : (
-        <>
-          <ReputationSeller reputations={reputations} />
-        </>
-      )}
     </article>
   );
 };

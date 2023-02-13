@@ -15,7 +15,7 @@ import { URL_API } from "../utils/URL";
 import { cookieManager, FORMTIME } from "../utils/cookieManager";
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /** HOOK: **/
-const useProduct = (user, id = "") => {
+const useSell = (user, id = "") => {
   const navigate = useNavigate();
   const [productState, dispatch] = useReducer(sellProductReducer, initialState);
   const { FetchFunction } = ManageFetch();
@@ -338,4 +338,4 @@ const useProduct = (user, id = "") => {
   };
 };
 
-export default useProduct;
+export default useSell;

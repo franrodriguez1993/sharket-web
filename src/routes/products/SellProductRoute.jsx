@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "../../css/ProductsRoute/SellProductsRoute.css";
-import useProduct from "../../hooks/useProduct";
+import useSell from "../../hooks/useSell";
 import { UserContext } from "../../context/UserProvider";
 
 //Components:
@@ -22,7 +22,7 @@ const SellProductRoute = () => {
     handleSellProduct,
     loading,
     errorFetch,
-  } = useProduct(user);
+  } = useSell(user);
 
   return (
     <div className="sellProduct-container">

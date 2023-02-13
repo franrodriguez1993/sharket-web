@@ -15,5 +15,8 @@ const TYPES_PRODUCTROUTE = {
   setFavorites: "set-favorites-products",
   addNewFavorite: "add-favorites",
   removeOneFavorite: "remove-favorite",
+  handleChangeComment: "handle-change-comment",
+  errorFormComment: "error-form-comment",
+  addNewComment: "add-new-comment",
 };
 export default TYPES_PRODUCTROUTE;
