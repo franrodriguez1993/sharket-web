@@ -1,0 +1,45 @@
+.carRoute_body {
+  width: 94%;
+  background-color: #fff;
+  min-height: 15rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.cartSection {
+  width: 100%;
+}
+
+.buySection {
+  width: 100%;
+}
+.cartroute-hr {
+  width: 90%;
+  margin: 1rem auto;
+}
+
+/** MODALS **/
+.modalbuy {
+  width: 30%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.modalbuy-icon {
+  width: 4rem;
+}
+
+@media (max-width: 800px) {
+  .modalbuy {
+    width: 50%;
+  }
+}
+@media (max-width: 500px) {
+  .modalbuy {
+    width: 80%;
+  }
+}

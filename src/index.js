@@ -30,172 +30,183 @@ import PanelAdminRoute from "./routes/superuser/PanelAdminRoute";
 import FavoritesRoute from "./routes/profile/FavoritesRoute";
 import NotificationRoute from "./routes/profile/NotificationRoute";
 import ProductCommentRoute from "./routes/products/ProductCommentRoute";
+import CartRoute from "./routes/general/CartRoute";
+import CartProvider from "./context/CartProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <Routes>
-          <Route path="/" element={<App />}>
-            <Route index element={<HomeRoute />} />
-            <Route path="/error" element={<ErrorPage />} />
-            <Route path="/login" element={<LoginRoute />} />
-            <Route path="/register" element={<RegisterRoute />} />
-            <Route path="/search/:search" element={<SearchRoute />} />
+        <CartProvider>
+          <Routes>
+            <Route path="/" element={<App />}>
+              <Route index element={<HomeRoute />} />
+              <Route path="/error" element={<ErrorPage />} />
+              <Route path="/login" element={<LoginRoute />} />
+              <Route path="/register" element={<RegisterRoute />} />
+              <Route path="/search/:search" element={<SearchRoute />} />
 
-            {/** ----------- PRODUCTOS -----------  **/}
-            <Route path="/products" element={<ProductsRoute />} />
-            <Route
-              path="/products/user/list/:id"
-              element={
-                <VerifyAccess>
-                  <MyProductsRoute />
-                </VerifyAccess>
-              }
-            />
-            <Route
-              path="/products/publish"
-              element={
-                <VerifyAccess>
-                  <SellProductRoute />
-                </VerifyAccess>
-              }
-            />
-            <Route
-              path="/products/edit/:id"
-              element={
-                <VerifyAccess>
-                  <EditProductRoute />
-                </VerifyAccess>
-              }
-            />
+              {/** ----------- PRODUCTOS -----------  **/}
+              <Route path="/products" element={<ProductsRoute />} />
+              <Route
+                path="/products/user/list/:id"
+                element={
+                  <VerifyAccess>
+                    <MyProductsRoute />
+                  </VerifyAccess>
+                }
+              />
+              <Route
+                path="/products/publish"
+                element={
+                  <VerifyAccess>
+                    <SellProductRoute />
+                  </VerifyAccess>
+                }
+              />
+              <Route
+                path="/products/edit/:id"
+                element={
+                  <VerifyAccess>
+                    <EditProductRoute />
+                  </VerifyAccess>
+                }
+              />
 
-            <Route
-              path="/products/user/sales"
-              element={
-                <VerifyAccess>
-                  <ViewSalesRoute />
-                </VerifyAccess>
-              }
-            />
-            <Route
-              path="/products/user/buys"
-              element={
-                <VerifyAccess>
-                  <ViewBuysRoute />
-                </VerifyAccess>
-              }
-            />
+              <Route
+                path="/products/user/sales"
+                element={
+                  <VerifyAccess>
+                    <ViewSalesRoute />
+                  </VerifyAccess>
+                }
+              />
+              <Route
+                path="/products/user/buys"
+                element={
+                  <VerifyAccess>
+                    <ViewBuysRoute />
+                  </VerifyAccess>
+                }
+              />
 
-            {/** ---------- PRODUCTO INDIVIDUAL ----------**/}
-            <Route path="/product/:id" element={<ProductRoute />} />
-            <Route
-              path="/product/comments/:id"
-              element={<ProductCommentRoute />}
-            />
+              {/** ---------- PRODUCTO INDIVIDUAL ----------**/}
+              <Route path="/product/:id" element={<ProductRoute />} />
+              <Route
+                path="/product/comments/:id"
+                element={
+                  <VerifyAccess>
+                    <ProductCommentRoute />
+                  </VerifyAccess>
+                }
+              />
 
-            {/** ----------------- PROFILE ----------------- **/}
-            <Route
-              path="/profile"
-              element={
-                <VerifyAccess>
-                  <ProfileRoute />
-                </VerifyAccess>
-              }
-            />
-            <Route
-              path="/profile/data"
-              element={
-                <VerifyAccess>
-                  <PersonalDataRoute />
-                </VerifyAccess>
-              }
-            />
+              {/** ----------------- PROFILE ----------------- **/}
+              <Route
+                path="/profile"
+                element={
+                  <VerifyAccess>
+                    <ProfileRoute />
+                  </VerifyAccess>
+                }
+              />
+              <Route
+                path="/profile/data"
+                element={
+                  <VerifyAccess>
+                    <PersonalDataRoute />
+                  </VerifyAccess>
+                }
+              />
 
-            <Route
-              path="/profile/mail"
-              element={
-                <VerifyAccess>
-                  <ChangeMailRoute />
-                </VerifyAccess>
-              }
-            />
-            <Route
-              path="/profile/password"
-              element={
-                <VerifyAccess>
-                  <PasswordRoute />
-                </VerifyAccess>
-              }
-            />
-            <Route
-              path="/profile/image"
-              element={
-                <VerifyAccess>
-                  <ChangeImageRoute />
-                </VerifyAccess>
-              }
-            />
-            <Route
-              path="/profile/birthday"
-              element={
-                <VerifyAccess>
-                  <BirthdayRoute />
-                </VerifyAccess>
-              }
-            />
-            <Route
-              path="/profile/address"
-              element={
-                <VerifyAccess>
-                  <AddressRoute />
-                </VerifyAccess>
-              }
-            />
+              <Route
+                path="/profile/mail"
+                element={
+                  <VerifyAccess>
+                    <ChangeMailRoute />
+                  </VerifyAccess>
+                }
+              />
+              <Route
+                path="/profile/password"
+                element={
+                  <VerifyAccess>
+                    <PasswordRoute />
+                  </VerifyAccess>
+                }
+              />
+              <Route
+                path="/profile/image"
+                element={
+                  <VerifyAccess>
+                    <ChangeImageRoute />
+                  </VerifyAccess>
+                }
+              />
+              <Route
+                path="/profile/birthday"
+                element={
+                  <VerifyAccess>
+                    <BirthdayRoute />
+                  </VerifyAccess>
+                }
+              />
+              <Route
+                path="/profile/address"
+                element={
+                  <VerifyAccess>
+                    <AddressRoute />
+                  </VerifyAccess>
+                }
+              />
 
-            <Route
-              path="/profile/creditcard"
-              element={
-                <VerifyAccess>
-                  <CreditCardRoute />
-                </VerifyAccess>
-              }
-            />
+              <Route
+                path="/profile/creditcard"
+                element={
+                  <VerifyAccess>
+                    <CreditCardRoute />
+                  </VerifyAccess>
+                }
+              />
 
-            <Route
-              path="/profile/favorite"
-              element={
-                <VerifyAccess>
-                  <FavoritesRoute />
-                </VerifyAccess>
-              }
-            />
+              <Route
+                path="/profile/favorite"
+                element={
+                  <VerifyAccess>
+                    <FavoritesRoute />
+                  </VerifyAccess>
+                }
+              />
 
-            <Route
-              path="/profile/notification"
-              element={<NotificationRoute />}
-            />
+              <Route
+                path="/profile/notification"
+                element={<NotificationRoute />}
+              />
 
-            {/** ----------------------- SUPERUSER -------------------- **/}
-            <Route
-              path="/panel/staff"
-              element={
-                <VerifyAccess>
-                  <PanelStaffRoute />
-                </VerifyAccess>
-              }
-            />
-            <Route
-              path="/panel/admin/*"
-              element={
-                <VerifyAccess>
-                  <PanelAdminRoute />
-                </VerifyAccess>
-              }
-            />
-          </Route>
-        </Routes>
+              {/** ----------------------- SUPERUSER -------------------- **/}
+              <Route
+                path="/panel/staff"
+                element={
+                  <VerifyAccess>
+                    <PanelStaffRoute />
+                  </VerifyAccess>
+                }
+              />
+              <Route
+                path="/panel/admin/*"
+                element={
+                  <VerifyAccess>
+                    <PanelAdminRoute />
+                  </VerifyAccess>
+                }
+              />
+
+              {/** ----------------------- CART -------------------- **/}
+              <Route path="/cart" element={<CartRoute />} />
+            </Route>
+          </Routes>
+        </CartProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>

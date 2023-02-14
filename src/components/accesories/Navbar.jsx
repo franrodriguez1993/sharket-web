@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { UserContext } from "../../context/UserProvider";
 import "../../css/accesories/Navbar.css";
+//Context:
+import { CartContext } from "../../context/CartProvider";
+import { UserContext } from "../../context/UserProvider";
 //Hook:
 import useNotification from "../../hooks/useNotification";
 //Components:
@@ -11,9 +13,11 @@ import userIcon from "../../svg/user_icon.svg";
 import superuserIcon from "../../svg/superuser_icon.svg";
 import bellNoNoti from "../../svg/bell_nonoti.svg";
 import bellNoti from "../../svg/bell_noti.svg";
+import cart from "../../svg/cart.svg";
 const Navbar = () => {
   const navigate = useNavigate();
   const { user, logOut, loadingPage } = useContext(UserContext);
+  const { cleanCart } = useContext(CartContext);
   const [form, setForm] = useState("");
   const { checkUnseen, unseen } = useNotification();
 
@@ -185,7 +189,10 @@ const Navbar = () => {
                           className="dropdown-item"
                           aria-current="page"
                           to="/"
-                          onClick={logOut}
+                          onClick={() => {
+                            cleanCart();
+                            logOut();
+                          }}
                         >
                           Logout
                         </NavLink>
@@ -197,19 +204,30 @@ const Navbar = () => {
               <li className="nav-item dropdown nav-li_userIcon">
                 {user && (
                   <>
+                    {/* seen icon logic*/}
                     {unseen.length !== 0 ? (
                       <img
                         src={bellNoti}
-                        alt=""
+                        alt="bell"
                         className="navbar-userIcon"
                         onClick={() => navigate("/profile/notification")}
                       />
                     ) : (
                       <img
                         src={bellNoNoti}
-                        alt=""
+                        alt="bell"
                         className="navbar-userIcon"
                         onClick={() => navigate("/profile/notification")}
+                      />
+                    )}
+
+                    {/* cart icon logic*/}
+                    {user.Rol.rol_name === "user" && (
+                      <img
+                        src={cart}
+                        alt="cart"
+                        className="navbar-userIcon ms-4"
+                        onClick={() => navigate("/cart")}
                       />
                     )}
                   </>

@@ -132,27 +132,24 @@
   margin-top: 1rem;
 }
 
-/** Reputation: **/
-.SellerData-reputation {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 1rem;
+/**QUANTITY:**/
+.sellerdata-quantity_input {
+  border: none;
+  border-radius: 10px;
+  background-color: var(--lightGreen);
+  color: var(--blueDark);
+  font-weight: bolder;
+  text-align: center;
 }
-.reputation-logo {
-  width: 3rem;
-  margin-top: 1rem;
-}
-.p-repu-okay {
-  color: #12b641;
-  font-weight: 600;
-}
-.p-repu-notOkay {
-  color: #b62612;
-  font-weight: 600;
-}
-.p-repu-noScored {
-  font-weight: 600;
+.sellerdata-quantity_button {
+  margin: 0.5rem;
+  padding: 0.3rem;
+  min-width: 2rem;
+  border: none;
+  border-radius: 15px;
+  background-color: var(--darkDarkBlue);
+  color: #fff;
+  font-weight: bold;
 }
 
 /**  --------------------FAVORITE SECTION -----------------------  **/

@@ -58,6 +58,8 @@ const ProductRoute = () => {
                 <SellerData
                   seller={product.user}
                   address={product.user_address}
+                  user={user}
+                  product={product}
                 />
               </section>
 
