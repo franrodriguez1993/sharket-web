@@ -31,9 +31,20 @@ const ProductData = ({ product }) => {
           <p>
             <b>Brand: </b> {product.product_brand || "---"}
           </p>
-          <p>
-            <b>Price: </b> $ {product.product_price}
-          </p>
+
+          {product.product_offer !== 0 ? (
+            <>
+              <p className="text-success">
+                <b>Price: </b> ${" "}
+                {(product.product_price * (100 - product.product_offer)) / 100}{" "}
+                (<i className="text-success">{product.product_offer} % off</i>)
+              </p>
+            </>
+          ) : (
+            <p>
+              <b>Price: </b> $ {product.product_price}
+            </p>
+          )}
           <p>
             <b>Status: </b> {product.product_status}
           </p>

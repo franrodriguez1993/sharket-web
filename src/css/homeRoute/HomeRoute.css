@@ -6,3 +6,21 @@
   justify-content: center;
   background-color: #fff;
 }
+
+.section-home {
+  width: 100%;
+  background-color: #fff;
+  min-height: 10rem;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.home-img {
+  padding: 0;
+  margin-top: 2rem;
+  margin-left: 0;
+  width: 98.9vw;
+  object-fit: contain;
+}

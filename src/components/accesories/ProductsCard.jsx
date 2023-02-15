@@ -28,10 +28,19 @@ const ProductsCard = ({ product }) => {
         />
       )}
       <div className="productCard-container_desc">
-        <p className="productCard-price">
-          <b>Price: $</b>
-          {product.product_price}
-        </p>
+        {product.product_offer !== 0 ? (
+          <>
+            <p className="text-success">
+              <b>Price: </b> ${" "}
+              {(product.product_price * (100 - product.product_offer)) / 100} (
+              <i className="text-success">{product.product_offer} % off</i>)
+            </p>
+          </>
+        ) : (
+          <p>
+            <b>Price: </b> $ {product.product_price}
+          </p>
+        )}
         <p className="productCard-price">
           <b>Status: </b>
           {product.product_status}

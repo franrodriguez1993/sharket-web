@@ -13,7 +13,7 @@ const Footer = () => {
       </div>
       {/**  COPYRIGHT  **/}
       <div className="footer-copyright">
-        <b className="footer-text"> © 2000-2023 Sharknet.com </b>
+        <b className="footer-text"> © 2000-2023 sharknet.com </b>
       </div>
       {/**  OPTIONS  **/}
       <div className="footer-conditions">
