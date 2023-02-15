@@ -85,7 +85,7 @@
   z-index: 200;
 }
 .ModalImage-img {
-  width: 35rem;
+  width: 27rem;
 }
 .cross-svg {
   position: fixed;
@@ -264,6 +264,11 @@
     width: 18rem;
     height: 15rem;
   }
+
+  /** IMG MODAL**/
+  .ModalImage-img {
+    width: 22rem;
+  }
 }
 @media (max-width: 900px) {
   /*   -----------  SECTION PRODUCT -----------   */
@@ -295,6 +300,11 @@
     height: 13rem;
   }
 
+  /** IMG MODAL**/
+  .ModalImage-img {
+    width: 17rem;
+  }
+
   /*   -----------  SECTION SELLER -----------   */
 
   .sellerData-container {
@@ -321,5 +331,10 @@
   }
   .productRoute-error-msg {
     font-size: 1.1rem;
+  }
+
+  /** IMG MODAL**/
+  .ModalImage-img {
+    width: 16rem;
   }
 }

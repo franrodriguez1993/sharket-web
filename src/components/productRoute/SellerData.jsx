@@ -90,48 +90,56 @@ const SellerData = ({ seller, address, user, product }) => {
         {user ? (
           <>
             {user.Rol.rol_name === "user" &&
-              seller.user_id !== user.user_id &&
-              product.product_condition === "active" && (
-                <>
-                  <b className="m-3">Buy product</b>
+            seller.user_id !== user.user_id &&
+            product.product_condition === "active" ? (
+              <>
+                <b className="m-3">Buy product</b>
+                <div>
+                  <input
+                    type="number"
+                    className="sellerdata-quantity_input"
+                    min={1}
+                    max={product.product_stock}
+                    onChange={(e) => setQuantity(e.target.value)}
+                    value={quantity}
+                  />
+                  <button
+                    onClick={removeQuantity}
+                    className="sellerdata-quantity_button"
+                  >
+                    -
+                  </button>
+                  <button
+                    onClick={addQuantity}
+                    className="sellerdata-quantity_button"
+                  >
+                    +
+                  </button>
                   <div>
-                    <input
-                      type="number"
-                      className="sellerdata-quantity_input"
-                      min={1}
-                      max={product.product_stock}
-                      onChange={(e) => setQuantity(e.target.value)}
-                      value={quantity}
-                    />
                     <button
-                      onClick={removeQuantity}
-                      className="sellerdata-quantity_button"
+                      className={` ${
+                        quantity <= limit ? "button-blue" : "button-disable"
+                      }`}
+                      onClick={() => {
+                        if (quantity <= limit) {
+                          handleAddToCart();
+                        }
+                      }}
                     >
-                      -
+                      Add to cart
                     </button>
-                    <button
-                      onClick={addQuantity}
-                      className="sellerdata-quantity_button"
-                    >
-                      +
-                    </button>
-                    <div>
-                      <button
-                        className={` ${
-                          quantity <= limit ? "button-blue" : "button-disable"
-                        }`}
-                        onClick={() => {
-                          if (quantity <= limit) {
-                            handleAddToCart();
-                          }
-                        }}
-                      >
-                        Add to cart
-                      </button>
-                    </div>
                   </div>
-                </>
-              )}
+                </div>
+              </>
+            ) : (
+              <>
+                {seller.user_id === user.user_id ? (
+                  <b>You can't buy your own products.</b>
+                ) : (
+                  <b>This product is not available to buy.</b>
+                )}
+              </>
+            )}
           </>
         ) : (
           <>

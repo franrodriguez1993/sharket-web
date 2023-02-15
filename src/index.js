@@ -32,6 +32,7 @@ import NotificationRoute from "./routes/profile/NotificationRoute";
 import ProductCommentRoute from "./routes/products/ProductCommentRoute";
 import CartRoute from "./routes/general/CartRoute";
 import CartProvider from "./context/CartProvider";
+import NotFoundRoute from "./routes/general/NotFoundRoute";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -43,6 +44,7 @@ root.render(
             <Route path="/" element={<App />}>
               <Route index element={<HomeRoute />} />
               <Route path="/error" element={<ErrorPage />} />
+              <Route path="*" element={<NotFoundRoute />} />
               <Route path="/login" element={<LoginRoute />} />
               <Route path="/register" element={<RegisterRoute />} />
               <Route path="/search/:search" element={<SearchRoute />} />
