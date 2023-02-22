@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { URL_API } from "../../utils/URL";
 import ManageFetch from "../../utils/manageFetch";
 import { TYPES_SEARCHROUTE } from "../../reducers/types/searchRouteType";
