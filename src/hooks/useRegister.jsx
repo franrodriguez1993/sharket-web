@@ -80,7 +80,7 @@ const useRegister = () => {
     //Register:
     dispatch({ type: TYPES_REGISTER.setErrorForm, payload: {} });
     dispatch({ type: TYPES_REGISTER.setLoading });
-    const url = `${URL_API}/user/register`;
+    const url = `${URL_API}/auth/register`;
     const body = {
       username: form.username.trim(),
       mail: form.mail.trim(),

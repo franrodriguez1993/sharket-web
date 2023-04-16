@@ -47,7 +47,6 @@ const CartRoute = () => {
           buyer: user.user_id,
           products,
           sale_instalments: 0,
-          creditCard: "",
         },
       });
     }
@@ -74,13 +73,6 @@ const CartRoute = () => {
 
   /** HANDLE SUBMIT BUY  **/
   const handleSubmitBuy = () => {
-    if (form.creditCard === "") {
-      return dispatch({
-        type: TYPES_CART.errorForm,
-        payload: "you have to select a credit card.",
-      });
-    }
-
     //buy:
     dispatch({ type: TYPES_CART.setLoading });
     const url = `${URL_API}/product/sale/buy`;
@@ -125,33 +117,14 @@ const CartRoute = () => {
                 <p>
                   <b>Total Price: </b>${totalPrice}
                 </p>
-                {/* CHECK FOR ADDRESS AND CREDIT CARD  */}
-                {user.user_creditCards.length === 0 ? (
-                  <>
-                    <div>
-                      <b>
-                        You need to add a credit card to your profile before to
-                        buy a product.
-                      </b>
-                      <button
-                        className="button-blue"
-                        onClick={() => navigate("/profile/creditcard")}
-                      >
-                        Add credit card
-                      </button>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <CartForm
-                      handleChangeForm={handleChangeForm}
-                      form={form}
-                      user={user}
-                      handleSubmitBuy={handleSubmitBuy}
-                      errorForm={errorForm}
-                    />
-                  </>
-                )}
+
+                <CartForm
+                  handleChangeForm={handleChangeForm}
+                  form={form}
+                  user={user}
+                  handleSubmitBuy={handleSubmitBuy}
+                  errorForm={errorForm}
+                />
               </section>
             </div>
           </>

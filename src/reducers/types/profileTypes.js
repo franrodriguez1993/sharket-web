@@ -10,9 +10,7 @@ const TYPES_PROFILEROUTE = {
   handleChangeImage: "handle-change-img",
   handleChangeBirthday: "handle-change-birthday",
   handleChangeAddress: "handle-change-address",
-  handleChangeCreditCard: "handle-change-creditcard",
   setAddresses: "set-addresses-list",
-  setCreditCards: "set-creditcards",
   setImageForm: "set-img-form",
 };
 

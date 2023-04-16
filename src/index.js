@@ -24,7 +24,6 @@ import PasswordRoute from "./routes/profile/PasswordRoute";
 import ChangeImageRoute from "./routes/profile/ChangeImageRoute";
 import BirthdayRoute from "./routes/profile/BirthdayRoute";
 import AddressRoute from "./routes/profile/AddressRoute";
-import CreditCardRoute from "./routes/profile/CreditCardRoute";
 import PanelStaffRoute from "./routes/superuser/PanelStaffRoute";
 import PanelAdminRoute from "./routes/superuser/PanelAdminRoute";
 import FavoritesRoute from "./routes/profile/FavoritesRoute";
@@ -159,15 +158,6 @@ root.render(
                 element={
                   <VerifyAccess>
                     <AddressRoute />
-                  </VerifyAccess>
-                }
-              />
-
-              <Route
-                path="/profile/creditcard"
-                element={
-                  <VerifyAccess>
-                    <CreditCardRoute />
                   </VerifyAccess>
                 }
               />

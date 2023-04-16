@@ -30,8 +30,6 @@ const useProfile = (user, token, logIn) => {
     birthdayForm,
     addressesList,
     addressForm,
-    creditCardForm,
-    creditcardList,
   } = states;
 
   /** ============================  USE EFFECT  ============================  **/
@@ -60,12 +58,6 @@ const useProfile = (user, token, logIn) => {
     dispatch({
       type: TYPES_PROFILEROUTE.setAddresses,
       payload: user.user_addresses,
-    });
-
-    //Credit cards:
-    dispatch({
-      type: TYPES_PROFILEROUTE.setCreditCards,
-      payload: user.user_creditCards,
     });
   }, []);
 
@@ -109,14 +101,6 @@ const useProfile = (user, token, logIn) => {
   const HCAddress = (e) => {
     dispatch({
       type: TYPES_PROFILEROUTE.handleChangeAddress,
-      payload: e.target,
-    });
-  };
-
-  //Credit card:
-  const HCCreditCard = (e) => {
-    dispatch({
-      type: TYPES_PROFILEROUTE.handleChangeCreditCard,
       payload: e.target,
     });
   };
@@ -385,75 +369,6 @@ const useProfile = (user, token, logIn) => {
     });
   };
 
-  /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-  /* CREDIT CARDS  */
-
-  const HSDeleteCreditCard = (e, id) => {
-    e.preventDefault();
-    dispatch({ type: TYPES_PROFILEROUTE.setloading });
-    const url = `${URL_API}/user/creditcard/del/${id}`;
-    FetchFunction({ url, method: "DELETE" }).then((res) => {
-      if (res.status === 200) {
-        logIn(user.user_id, token);
-        navigate("/profile");
-      } else {
-        dispatch({
-          type: TYPES_PROFILEROUTE.setErrorFetch,
-          payload: "Server error",
-        });
-      }
-    });
-  };
-
-  const HSCreditCard = (e) => {
-    e.preventDefault();
-
-    //Reset errors:
-    dispatch({ type: TYPES_PROFILEROUTE.resetErrorsForm });
-
-    //Check errors:
-    const checkErrors = validateForm(creditCardForm, [
-      "cc_name",
-      "cc_number",
-      "cc_code",
-      "cc_month",
-      "cc_year",
-      "cc_bank",
-    ]);
-    if (Object.keys(checkErrors).length !== 0) {
-      return dispatch({
-        type: TYPES_PROFILEROUTE.setErrorsForm,
-        payload: checkErrors,
-      });
-    }
-
-    //Add credit card:
-
-    dispatch({ type: TYPES_PROFILEROUTE.setloading });
-    const body = {
-      name: creditCardForm.cc_name,
-      number: creditCardForm.cc_number.toString(),
-      bank: creditCardForm.cc_bank.toString(),
-      date: `${creditCardForm.cc_month}/${creditCardForm.cc_year
-        .toString()
-        .slice(2, 4)}`,
-      code: creditCardForm.cc_code.toString(),
-    };
-    const url = `${URL_API}/user/creditcard/add/${user.user_id}`;
-    FetchFunction({ url, method: "POST", body }).then((res) => {
-      if (res.status === 201) {
-        logIn(user.user_id, token);
-        navigate("/profile");
-      } else {
-        console.log(res);
-        dispatch({
-          type: TYPES_PROFILEROUTE.setErrorFetch,
-          payload: "Server error",
-        });
-      }
-    });
-  };
-
   /** RETURNS **/
   return {
     loading,
@@ -479,11 +394,6 @@ const useProfile = (user, token, logIn) => {
     HSDeleteAddress,
     HCAddress,
     HSAdress,
-    creditCardForm,
-    creditcardList,
-    HCCreditCard,
-    HSDeleteCreditCard,
-    HSCreditCard,
   };
 };
 

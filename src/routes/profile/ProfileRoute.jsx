@@ -46,12 +46,6 @@ const ProfileRoute = () => {
           >
             Address
           </button>
-          <button
-            className="button-blue"
-            onClick={() => navigate("/profile/creditcard")}
-          >
-            Credit Card
-          </button>
         </nav>
         <article className="profile-data">
           <h3 className="title">Personal data</h3>

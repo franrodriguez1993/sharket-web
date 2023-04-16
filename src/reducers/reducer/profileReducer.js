@@ -24,15 +24,6 @@ export const initialStates = {
     city: "",
     state: "",
   },
-  creditcardList: [],
-  creditCardForm: {
-    cc_name: "",
-    cc_number: "",
-    cc_month: "",
-    cc_year: "",
-    cc_code: "",
-    cc_bank: "",
-  },
 };
 
 /**  FUNCTION REDUCER    **/
@@ -122,20 +113,6 @@ export const profileReducer = (state, action) => {
     /** SET ADDRESSES LIST**/
     case TYPES_PROFILEROUTE.setAddresses:
       return { ...state, addressesList: action.payload };
-
-    /** SET CREDITCARDS LIST**/
-    case TYPES_PROFILEROUTE.setCreditCards:
-      return { ...state, creditcardList: action.payload };
-
-    /** HANDLE CHANGE CREDIT CARD**/
-    case TYPES_PROFILEROUTE.handleChangeCreditCard:
-      return {
-        ...state,
-        creditCardForm: {
-          ...state.creditCardForm,
-          [action.payload.name]: action.payload.value,
-        },
-      };
 
     default:
       return state;

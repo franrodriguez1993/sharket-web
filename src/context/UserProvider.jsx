@@ -38,7 +38,7 @@ const UserProvider = (props) => {
     const refreshToken = cookieManager.get("refreshSharknet");
     if (!refreshToken) return setLoadingPage(false);
     //Si existe un token de sesión pedimos los datos al servidor:
-    FetchApi.refreshLogin(`${URL_API}/user/session`, { refreshToken }).then(
+    FetchApi.refreshLogin(`${URL_API}/auth/session`, { refreshToken }).then(
       (res) => {
         if (res.status !== 200) {
           cookieManager.remove("refreshSharknet");

@@ -25,7 +25,7 @@ const useLogin = (initialState) => {
     }
     setLoginLoading(true);
     FetchFunction({
-      url: `${URL_API}/user/login`,
+      url: `${URL_API}/auth/login`,
       method: "POST",
       body: form,
     }).then((res) => {
